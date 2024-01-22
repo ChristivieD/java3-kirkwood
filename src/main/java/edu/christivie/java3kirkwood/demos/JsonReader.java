@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.List;
 
 public class JsonReader {
 
@@ -37,6 +38,8 @@ public class JsonReader {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         ArtistFromJson artistFromJson = mapper.readValue(json.toString(), ArtistFromJson.class);
-        artistFromJson.getArtists().forEach(System.out::println);
+        List<Artist> artists = artistFromJson.getArtists();
+        artists.forEach(System.out::println);
+
     }
 }
