@@ -1,16 +1,14 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
-<html>
-<head>
+<%@include file="WEB-INF/shared/top.jsp"%>
     <title>Java 3 Web Applications</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="css/loading.css">
+    <link rel="stylesheet" href="${appURL}css/loading.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="container py-4 text-center">
     <h1 class="my-4">Java 3 Web Applications</h1>
+    <h3>${appURL}</h3>
     <div class="row justify-content-center" style="text-align: center;">
         <div class="col-xs-12 col-sm-6 col-lg-5 mb-4">
             <h3>Personal Projects</h3>
@@ -35,5 +33,4 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
 <script src="js/loading.js"></script>
-</body>
-</html>
+<%@include file="WEB-INF/shared/bottom.jsp"%>

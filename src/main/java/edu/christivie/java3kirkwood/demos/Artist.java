@@ -5,9 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Artist {
     @JsonProperty("name")
     private String name;
-
-    @JsonProperty("picture_big")
-    private String picture_big;
+    @JsonProperty("picture")
+    private String picture;
 
     public Artist() {
     }
@@ -16,15 +15,15 @@ public class Artist {
         return name;
     }
 
-    public String getPicture_big() {
-        return picture_big;
+    public String getPicture() {
+        return picture;
     }
 
     @Override
     public String toString() {
         return "Artist{" +
                 "name='" + name + '\'' +
-                ", picture_big='" + picture_big + '\'' +
+                ", picture='" + picture + '\'' +
                 '}';
     }
 }
