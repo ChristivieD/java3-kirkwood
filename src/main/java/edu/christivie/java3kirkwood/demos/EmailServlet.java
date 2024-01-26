@@ -1,5 +1,6 @@
 package edu.christivie.java3kirkwood.demos;
 
+import edu.christivie.java3kirkwood.shared.CommunicationService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,9 +19,16 @@ public class EmailServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
        // Get the parameters from the request object
-        // create a communicationService object, and calla method to send an email
+        // create a communicationService object, and call a method to send an email
         // set a "success" attribute
         // forward the request to the java servlet page
-        super.doPost(req, resp);
+        String email = req.getParameter("email");
+        String subject = req.getParameter("subject");
+        String message = req.getParameter("message");
+
+        CommunicationService.sendEmail(email,subject,message);
+        req.setAttribute("Success","Email Sent");
+        req.getRequestDispatcher("WEB-INF/demos/email.jsp").forward(req,resp);
     }
+
 }
