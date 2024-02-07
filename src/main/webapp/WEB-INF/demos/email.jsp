@@ -1,13 +1,21 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Send an email</title>
 </head>
 <body>
-<c:if test="${success}">
-    <p>Email sent</p>
-</c:if>
-<form action="${appURL}/email" method="post">
+<c:choose>
+    <c:when test="${not empty success and success eq true}">
+        <p>Email sent</p>
+    </c:when>
+    <c:when test="${not empty success and success eq true}">
+        <p>Email was not sent</p>
+    </c:when>
+    <c:otherwise>
+        <p> Use the form below to send an email</p>
+    </c:otherwise>
+</c:choose>
+<form action="email" method="post">
     <!-- Email Address -->
     <label for="email">Email Address:</label>
     <input type="email" id="email" name="email" required>
