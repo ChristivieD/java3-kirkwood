@@ -4,10 +4,7 @@ import edu.christivie.java3kirkwood.learnx.models.User;
 import edu.christivie.java3kirkwood.shared.CommunicationService;
 import org.mindrot.jbcrypt.BCrypt;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +70,7 @@ public class UserDAO extends Database{
         }
         return null;
     }
-    public static boolean add(User user){
+    public static String add(User user){
         try(Connection connection = getConnection();
             CallableStatement statement = connection.prepareCall("{CALL sp_add_user(?, ?)}")
         ){
@@ -94,7 +91,7 @@ public class UserDAO extends Database{
                             message += "<p> Please enter the code <b>" + code+ "</b> on the website to activate your account</p>";
                             boolean sent = CommunicationService.sendEmail(user.getEmail(),subject, message);
                             // To do: if the email is not send, delete the user by email and delete the 2fa
-                            return sent;
+                            return sent ? code : "";
                         }
                     }
                 }
@@ -103,6 +100,25 @@ public class UserDAO extends Database{
             System.out.println("Likely error with stored procedure");
             System.out.println(e.getMessage());
         }
-        return false;
+        return "";
+    }
+    public  static void  update(User user){
+        try(Connection connection = getConnection();
+        CallableStatement statement = connection.prepareCall("CALL sp_update_user(?,?,?,?,?,?,?,?,?)")
+        ){
+            statement.setInt(1,user.getId());
+            statement.setString(2,user.getFirstName());
+            statement.setString(3,user.getLastName());
+            statement.setString(4,user.getEmail());
+            statement.setString(5,user.getPhone());
+            statement.setString(6,user.getLanguage());
+            statement.setString(7, user.getStatus());
+            statement.setString(8, user.getPrivileges());
+            statement.setTimestamp(9, Timestamp.from(user.getLast_logged_in()));
+            statement.executeUpdate();
+        }catch (SQLException e){
+            System.out.println("Likely error with stored procedure");
+            System.out.println(e.getMessage());
+        }
     }
 }
