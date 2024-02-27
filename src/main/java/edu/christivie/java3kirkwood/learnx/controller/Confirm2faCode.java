@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +19,12 @@ import java.util.Map;
 public class Confirm2faCode extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String resend = req.getParameter("resend");
+        if(resend != null){
+            HttpSession session = req.getSession();
+            String codeFromSession = (String)session.getAttribute("code");
+            String email = (String)session.getAttribute("email");
+        }
         req.setAttribute("pageTitle","confirm Signup Code");
         req.getRequestDispatcher("WEB-INF/learnx/2fa-confirm.jsp").forward(req,resp);
     }
@@ -38,13 +45,14 @@ public class Confirm2faCode extends HttpServlet {
             User userFromDatabase = UserDAO.get(email);
             userFromDatabase.setStatus("active");
             userFromDatabase.setPrivileges("student");
-            userFromDatabase.setLast_logged_in(Instant.now());
+            // get an istance representing utc 0
+            userFromDatabase.setLast_logged_in(Instant.now().atOffset(ZoneOffset.UTC).toInstant());
             UserDAO.update(userFromDatabase);
             userFromDatabase.setPassword(null);
             session.removeAttribute("code");
             session.removeAttribute("email");
-            session.setAttribute("active user", userFromDatabase);
-            session.setAttribute("flashMessage","Welcome New User!!!");
+            session.setAttribute("activeUser", userFromDatabase);
+            session.setAttribute("flashMessageSuccess","Welcome New User!!!");
             resp.sendRedirect("learnx");
             return;
         }

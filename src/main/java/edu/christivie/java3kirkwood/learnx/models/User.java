@@ -85,11 +85,14 @@ public class User {
     }
 
     public void setPassword(char[] password) {
-        String passwordStr = String.valueOf(password);
-        Matcher matcher = MyValidator.passwordPattern.matcher(passwordStr);
-        if(!matcher.matches()){
-            throw new IllegalArgumentException("Password must have minimum 8 characters and 3 of 4(uppercase, lowercase,number or characters)");
+        if(password != null){
+            String passwordStr = String.valueOf(password);
+            Matcher matcher = MyValidator.passwordPattern.matcher(passwordStr);
+            if(!matcher.matches()){
+                throw new IllegalArgumentException("Password must have minimum 8 characters and 3 of 4(uppercase, lowercase,number or characters)");
+            }
         }
+        // passwords can be set to null before te user is set as a session attribute
         this.password = password;
     }
 

@@ -32,7 +32,7 @@
                 </div>
             </form>
             <div class="text-center">
-                <p>Didn't receive the code? <a href="#">Resend</a></p>
+                <p>Didn't receive the code? <a href="${appURL}/confirm?resend">Resend</a></p>
             </div>
         </div>
     </div>
