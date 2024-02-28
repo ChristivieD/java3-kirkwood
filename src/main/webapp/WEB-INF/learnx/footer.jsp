@@ -5,6 +5,7 @@
             <script>document.write(new Date().getFullYear());</script> ${initParam['project1Name']}</p>
 
         <ul class="nav col-md-4 justify-content-end">
+            <li class="nav-item"><a href="${appURL}/terms-and-condition" class="nav-link px-2 text-muted">Terms And Condition</a></li>
             <li class="nav-item"><a href="${appURL}/privacy-policy" class="nav-link px-2 text-muted">Privacy Policy</a></li>
         </ul>
     </footer>
