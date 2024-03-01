@@ -2,6 +2,7 @@ package edu.christivie.java3kirkwood.learnx.controller;
 
 import edu.christivie.java3kirkwood.learnx.data.UserDAO;
 import edu.christivie.java3kirkwood.learnx.models.User;
+import edu.christivie.java3kirkwood.shared.CommunicationService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -23,7 +24,11 @@ public class Confirm2faCode extends HttpServlet {
         if(resend != null){
             HttpSession session = req.getSession();
             String codeFromSession = (String)session.getAttribute("code");
-            String email = (String)session.getAttribute("email");
+            if(codeFromSession != null && !codeFromSession.equals("")){
+                String email = (String)session.getAttribute("email");
+                CommunicationService.sendNewUserEmail(email,codeFromSession);
+                req.setAttribute("emailSent","A new email was sent with your access code");
+            }
         }
         req.setAttribute("pageTitle","confirm Signup Code");
         req.getRequestDispatcher("WEB-INF/learnx/2fa-confirm.jsp").forward(req,resp);

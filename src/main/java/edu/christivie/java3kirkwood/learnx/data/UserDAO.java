@@ -2,12 +2,15 @@ package edu.christivie.java3kirkwood.learnx.data;
 
 import edu.christivie.java3kirkwood.learnx.models.User;
 import edu.christivie.java3kirkwood.shared.CommunicationService;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class UserDAO extends Database{
     public static void main(String[] args) {
@@ -119,6 +122,24 @@ public class UserDAO extends Database{
         }catch (SQLException e){
             System.out.println("Likely error with stored procedure");
             System.out.println(e.getMessage());
+        }
+    }
+    public static  void passwordReset(String email, HttpServletRequest req){
+        User userFromDatabase = UserDAO.get(email);
+        if(userFromDatabase == null){
+            // no user found with that email
+            try(Connection connection = getConnection()){
+                String uuid = String.valueOf(UUID.randomUUID());
+                try(CallableStatement statement = connection.prepareCall("{CALL sp_add_password_reset(?,?)}")){
+                    statement.setString(1,email);
+                    statement.setString(2,uuid);
+                    statement.executeUpdate();
+                }
+                CommunicationService.sendPasswordResetEmail(email,uuid,req);
+            }catch (SQLException e){
+                System.out.println("Likely error with stored procedure");
+                System.out.println(e.getMessage());
+            }
         }
     }
 }

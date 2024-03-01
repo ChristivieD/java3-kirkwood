@@ -6,10 +6,11 @@ import com.azure.communication.email.models.*;
 import com.azure.core.util.polling.PollResponse;
 import com.azure.core.util.polling.SyncPoller;
 import io.github.cdimascio.dotenv.Dotenv;
+import jakarta.servlet.http.HttpServletRequest;
 
 public class CommunicationService {
     public static void main(String[] args) {
-        sendEmail("marc", "Testing", "Testing again");
+        sendEmail("christivie", "Testing", "Testing again");
     }
     private static EmailClient createEmailClient() {
         Dotenv dotenv = Dotenv.load();
@@ -27,6 +28,25 @@ public class CommunicationService {
         boolean sent = CommunicationService.sendEmail(email, subject, message);
         // To do: If the email is not send, delete the user by email and delete the 2fa
         return sent ? code : "";
+    }
+
+    public static boolean sendPasswordResetEmail(String email, String uuid, HttpServletRequest req) {
+        String subject = "LearnX Reset Password";
+        String message = "<h2>Welcome to LearnX</h2>";
+        // To do: add a message saying password or link expires in 30 min
+        message += "<p>Please use this link to securely reset your password.</p>";
+        String appURL;
+        if(req.isSecure()){
+            appURL = req.getServletContext().getInitParameter("appURLCloud");
+        }else{
+            appURL = req.getServletContext().getInitParameter("appURLLocal");
+        }
+        String fullURL = String.format("%s/new-password?token=%s", appURL, uuid);
+        message += String.format("<p><a href=\"%s\" target =\"_blank\">%s</a></p>", fullURL,fullURL);
+        message += "<p>If you didn't request to reset the password, you can ignore this message, your password will not be changed</p>";
+        boolean sent = CommunicationService.sendEmail(email, subject, message);
+        // To do: If the email is not send, delete the user by email and delete the 2fa
+        return sent;
     }
 
     public static boolean sendEmail(String toEmailAddress, String subject, String message)    {
