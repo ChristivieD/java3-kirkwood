@@ -50,10 +50,23 @@
                                         </c:if>
                                     </div>
                                 </div>
+                                <!-- birthday -->
+                                <div class="mb-4">
+                                    <label for="inputbirthday" class="form-label">Birthday *</label>
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i class="fa fa-calendar"></i></span>
+                                            <input  type="text" class="form-control border-0 bg-light rounded-end ps-1 <c:if test="${not empty results.birthdayError}">is-invalid</c:if>" placeholder="MM-DD-YYYY" id="inputbirthday" name="inputbirthday" value="${results.birthday}">
+                                        <c:if test="${not empty results.birthdayError}">
+                                            <div class="invalid-feedback">
+                                                    ${results.birthdayError}
+                                            </div>
+                                        </c:if>
+                                    </div>
+                                </div>
                                 <!-- Check box -->
                                 <div class="mb-4">
                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="checkbox-1" name="checkbox-1" <c:if test="${not empty results.agreeError}">is-invalid</c:if>" value="agree" <c:if test="${results.agree eq 'true'}">checked</c:if>>
+                                        <input type="checkbox" class="form-check-input <c:if test="${not empty results.agreeError}">is-invalid</c:if>" id="checkbox-1" name="checkbox-1" value="agree" <c:if test="${results.agree eq 'true'}">checked</c:if>>
                                         <label class="form-check-label" for="checkbox-1">By signing up, you agree to the <a href="${appURL}/terms">terms and conditions</a></label>
                                         <c:if test="${not empty results.agreeError}">
                                             <div class="invalid-feedback">

@@ -13,9 +13,11 @@ import java.io.IOException;
 public class SignoutServelt extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
+        HttpSession session = req.getSession(); // Get existing session
+//        session.invalidate(); // Remove all existing session attributes
         session.removeAttribute("activeUser");
-        session.setAttribute("flashMessageWarning", "You have signed out, see you next time!");
+//        session = req.getSession(); // Create new session
+        session.setAttribute("flashMessageWarning", "You are logged out. See you next time!");
         resp.sendRedirect("learnx");
     }
 }

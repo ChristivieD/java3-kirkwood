@@ -24,13 +24,12 @@ public class ResetPassword extends HttpServlet {
         String email = req.getParameter("inputEmail1");
         Map<String, String> results = new HashMap<>();
         results.put("email", email);
-        if(email != null && !email.equals("")){
-            UserDAO.passwordReset(email,req);
-            results.put("passwordResetMsg","If the is an account with the email entered, we will send a password reset link");
+        if(email != null && !email.equals("")) {
+            UserDAO.passwordReset(email, req);
+            results.put("passwordResetMsg", "If there is an account with the email entered, we will send a password reset link");
         }
-
         req.setAttribute("results", results);
-        req.setAttribute("pageTitle","Reset Password");
-        req.getRequestDispatcher("WEB-INF/learnx/reset-password.jsp").forward(req,resp);
+        req.setAttribute("pageTitle", "Reset your password");
+        req.getRequestDispatcher("WEB-INF/learnx/reset-password.jsp").forward(req, resp);
     }
 }

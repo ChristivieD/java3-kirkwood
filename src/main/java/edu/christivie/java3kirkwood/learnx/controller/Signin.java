@@ -52,8 +52,11 @@ public class Signin extends HttpServlet {
                     // To Do: Get an instant representing UTC 0
                     userFromDatabase.setLast_logged_in(Instant.now().atOffset(ZoneOffset.UTC).toInstant());
                     UserDAO.update(userFromDatabase);
+//                    userFromDatabase.setPassword("P@SSW0RD".toCharArray());
                     userFromDatabase.setPassword(null);
                     HttpSession session = req.getSession();
+//                    session.invalidate();
+//                    session = req.getSession();
                     session.setAttribute("activeUser", userFromDatabase);
                     session.setAttribute("flashMessageSuccess", "Welcome Back!");
                     if(remember != null && remember [0].equals("yes")){

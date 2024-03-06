@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
+import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -140,6 +141,45 @@ public class UserDAO extends Database{
                 System.out.println("Likely error with stored procedure");
                 System.out.println(e.getMessage());
             }
+        }
+    }
+    public static String getPasswordReset(String token){
+        String email = "";
+        try(Connection connection = getConnection();
+        CallableStatement statement = connection.prepareCall("{CALL sp_get_password_reset(?)}")
+        ){
+            statement.setString(1,token);
+            try(ResultSet resultSet = statement.executeQuery()){
+                if(resultSet.next()){
+                    Instant now = Instant.now();
+                    Instant created_at = resultSet.getTimestamp("created_at").toInstant();
+                     Duration timeBetween= Duration.between(now, created_at);
+                     long betweenMinutes = timeBetween.toMinutes();
+                     // To do: only return the email address if the minutes between is less than 30
+//                    System.out.println(betweenMinutes);
+                    email = resultSet.getString("email");
+                    // To do: delete the token if the duration is over 30 minutes
+                }
+            }
+        } catch(SQLException e){
+            System.out.println("Likely error with stored procedure");
+            System.out.println(e.getMessage());
+        }
+
+        return email;
+
+    }
+    public static  void updatePassword(User user){
+        try(Connection connection = getConnection();
+            CallableStatement statement = connection.prepareCall("CALL sp_update_user_password(?,?)")
+        ){
+            statement.setString(1,user.getEmail());
+            String hashedPassword = BCrypt.hashpw(String.valueOf(user.getPassword()),BCrypt.gensalt(12));
+            statement.setString(2,hashedPassword);
+            statement.executeUpdate();
+        }catch (SQLException e){
+            System.out.println("Likely error with stored procedure");
+            System.out.println(e.getMessage());
         }
     }
 }

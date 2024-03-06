@@ -1,0 +1,64 @@
+Last class I asked everyone to log in their Azure database, click the Networking tab, and allow public access from any IP Address. The purpose was for convenience only, so you and I can access your database from anywhere.
+
+Tell me 3 security-related things you would do on a real production database. Talk about Usernames/passwords, Azure Network settings, and the .env file.
+
+the passwords should not contain the username and it should be at least 8 characters long
+enable logging feature provided by azure You need to limit the IP addresses that are available to access your database.
+the .env file should be only accessible by users and application
+Which JSTL core (c) tag is used to create conditional if-else statements in a Java Server Page (JSP)?
+-- java--
+<c:choose>
+<c:when></c:when>
+<c:otherwise></c:otherwise>
+</c:choose>
+What is the purpose of the c:set tag in JSPs?
+To declare a variable or update the value of an existing variable.
+An Azure Database for MySQL flexible server is a fully managed database service that can handle mission-critical workloads with predictable performance, security, high availability, and dynamic scalability.
+PostgreSQL
+Briefly explain what the LPAD statement is doing.
+RAND() generates the random number. LPAD() ensures that it is always 6 characters long. The question was asking about LPAD
+Which statement is FALSE about session configuration?
+The <session-config> tag goes between the <project> tags of the pom.xml file.n
+What happens when the req.getSession() method is called?
+a new session is created, if it doesn't exist.
+an existing session is obtained, if one exists.
+Date Format
+public static Pattern datePattern = Pattern.compile("^\\d{4}-\\d{2}-\\d{2}$");
+URL Format:
+public static Pattern urlPattern = Pattern.compile("^https?://[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}(?:/[^/\\s]*)?$");
+State Format:
+public static Pattern statePattern = Pattern.compile("^[A-Za-z]{2}$");
+City Format:
+public static Pattern cityPattern = Pattern.compile("^[A-Za-z]+(?:[\\s-][A-Za-z]+)*$");
+public static boolean isValidDate(String date) {
+        Matcher matcher = datePattern.matcher(date);
+        return matcher.matches();
+    }
+
+    public static boolean isValidURL(String url) {
+        Matcher matcher = urlPattern.matcher(url);
+        return matcher.matches();
+    }
+
+    public static boolean isValidState(String state) {
+        Matcher matcher = statePattern.matcher(state);
+        return matcher.matches();
+    }
+
+    public static boolean isValidCity(String city) {
+        Matcher matcher = cityPattern.matcher(city);
+        return matcher.matches();
+    }
+
+
+        try{
+            Matcher matcher = MyValidator.birthdayPattern.matcher(birthday);
+            if(!matcher.matches()){
+                Helpers.ageInYears(birthday);
+                results.put("birthdayError","You must be 13 years old");
+            }
+            results.put("birthdayError","you must be 13 years old");
+        }
+        catch (IllegalArgumentException e){
+            throw new IllegalArgumentException("must be 13 years old");
+        }
