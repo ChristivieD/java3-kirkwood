@@ -53,10 +53,12 @@ public class SignupServlet extends HttpServlet {
         try{
             Matcher matcher = MyValidator.birthdayPattern.matcher(birthday);
             if(!matcher.matches()){
-                Helpers.ageInYears(birthday);
                 results.put("birthdayError","you must be 13 years old");
             }
-            results.put("birthdayError","you must be 13 years old");
+            int age = (int) Helpers.ageInYears(birthday);
+            if(age < 13){
+                throw new IllegalArgumentException("you must be 13 years old");
+            }
         }
         catch (IllegalArgumentException e){
             results.put("birthdayError",e.getMessage());

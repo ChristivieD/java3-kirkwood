@@ -12,7 +12,7 @@ import java.io.IOException;
 public class PrivacyPolicyServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("pageTitle","privacy-policy");
+        req.setAttribute("pageTitle","Privacy Policy");
         req.getRequestDispatcher("WEB-INF/learnx/privacy-policy.jsp").forward(req,resp);
     }
 }

@@ -127,7 +127,7 @@ public class UserDAO extends Database{
     }
     public static  void passwordReset(String email, HttpServletRequest req){
         User userFromDatabase = UserDAO.get(email);
-        if(userFromDatabase == null){
+        if(userFromDatabase != null){
             // no user found with that email
             try(Connection connection = getConnection()){
                 String uuid = String.valueOf(UUID.randomUUID());
@@ -154,7 +154,7 @@ public class UserDAO extends Database{
                     Instant now = Instant.now();
                     Instant created_at = resultSet.getTimestamp("created_at").toInstant();
                      Duration timeBetween= Duration.between(now, created_at);
-                     long betweenMinutes = timeBetween.toMinutes();
+                     long minutesBetween = timeBetween.toMinutes();
                      // To do: only return the email address if the minutes between is less than 30
 //                    System.out.println(betweenMinutes);
                     email = resultSet.getString("email");

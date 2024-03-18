@@ -30,7 +30,7 @@ public class Confirm2faCode extends HttpServlet {
                 req.setAttribute("emailSent","A new email was sent with your access code");
             }
         }
-        req.setAttribute("pageTitle","confirm Signup Code");
+        req.setAttribute("pageTitle","Confirm Signup Code");
         req.getRequestDispatcher("WEB-INF/learnx/2fa-confirm.jsp").forward(req,resp);
     }
 
@@ -62,7 +62,7 @@ public class Confirm2faCode extends HttpServlet {
             return;
         }
         req.setAttribute("results",results);
-        req.setAttribute("pageTitle","confirm Signup Code");
+        req.setAttribute("pageTitle","Confirm Signup Code");
         req.getRequestDispatcher("WEB-INF/learnx/2fa-confirm.jsp").forward(req,resp);
     }
 }

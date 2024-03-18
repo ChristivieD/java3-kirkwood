@@ -5,19 +5,18 @@
         <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12" >
             <h2>${pageTitle}</h2>
             <c:choose>
-                <c:when test="${ not empty emailSent}">
-                    <div class="alert alert-success">
-                        ${emailSent}
-                    </div>
+                <c:when test="${not empty emailSent}">
+                    <p class="alert alert-success">
+                            ${emailSent}
+                    </p>
                 </c:when>
-                <c:when test="${ not empty results.codeError}">
-                    <div class="alert alert-danger">
+                <c:when test="${not empty results.codeError}">
+                    <p class="alert alert-danger">
                             ${results.codeError}
-                    </div>
+                    </p>
                 </c:when>
                 <c:otherwise>
                     <p>Please enter the code you received via email</p>
-
                 </c:otherwise>
             </c:choose>
 
