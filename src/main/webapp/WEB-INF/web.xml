@@ -23,10 +23,10 @@
         <location>/errorHandler</location>
     </error-page>
 
-<!--    <error-page>-->
-<!--        <exception-type>java.lang.Throwable</exception-type>-->
-<!--        <location>/errorHandler</location>-->
-<!--    </error-page>-->
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/errorHandler</location>
+    </error-page>
 
     <context-param>
         <param-name>appURLLocal</param-name>

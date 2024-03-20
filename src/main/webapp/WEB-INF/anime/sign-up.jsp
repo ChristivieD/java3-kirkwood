@@ -1,5 +1,4 @@
-<<%@include file="/WEB-INF/anime/top.jsp"%>
-<%@include file="/WEB-INF/anime/top-nav.jsp"%>
+<%@include file="/WEB-INF/anime/top.jsp"%>
 <main class="container">
     <section class="p-0 d-flex align-items-center position-relative overflow-hidden">
         <div class="container-fluid">
@@ -11,13 +10,13 @@
                             <p class="lead mb-4">Please sign up for an account.</p>
 
                             <!-- Form START -->
-                            <form method="post" action="${appURL}/sign-up">
+                            <form action="${appURL}/sign-up" method="post">
                                 <!-- Email -->
                                 <div class="mb-4">
                                     <label for="inputEmail1" class="form-label">Email address *</label>
                                     <div class="input-group input-group-lg">
                                         <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i class="bi bi-envelope-fill"></i></span>
-                                        <input type="text" class="form-control border-0 bg-light rounded-end ps-1 <c:if test="${not empty results.emailError}">is-invalid</c:if>" placeholder="E-mail" id="inputEmail1"value="${results.email}" >
+                                        <input type="text" class="form-control border-0 bg-light rounded-end ps-1 <c:if test="${not empty results.emailError}">is-invalid</c:if>" placeholder="E-mail" id="inputEmail1" name="inputEmail1" value="${results.email}">
                                         <c:if test="${not empty results.emailError}">
                                             <div class="invalid-feedback">
                                                     ${results.emailError}
@@ -30,8 +29,8 @@
                                     <label for="inputPassword1" class="form-label">Password *</label>
                                     <div class="input-group input-group-lg">
                                         <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i class="fas fa-lock"></i></span>
-                                        <input type="password" class="form-control border-0 bg-light rounded-end ps-1 <c:if test="${not empty results.password1Error }">is-invalid</c:if> " placeholder="*********" id="inputPassword1" value="${results.password1}" >
-                                        <c:if test="${not empty results.password1Error }">
+                                        <input type="password" class="form-control border-0 bg-light rounded-end ps-1 <c:if test="${not empty results.password1Error}">is-invalid</c:if>" placeholder="*********" id="inputPassword1" name="inputPassword1"  value="${results.password1}">
+                                        <c:if test="${not empty results.password1Error}">
                                             <div class="invalid-feedback">
                                                     ${results.password1Error}
                                             </div>
@@ -43,18 +42,31 @@
                                     <label for="inputPassword2" class="form-label">Confirm Password *</label>
                                     <div class="input-group input-group-lg">
                                         <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i class="fas fa-lock"></i></span>
-                                        <input type="password" class="form-control border-0 bg-light rounded-end ps-1 <c:if test="${not empty results.password2Error }">is-invalid</c:if>" placeholder="*********" id="inputPassword2" value="${results.password2}">
-                                        <c:if test="${not empty results.password2Error }">
+                                        <input type="password" class="form-control border-0 bg-light rounded-end ps-1 <c:if test="${not empty results.password2Error}">is-invalid</c:if>" placeholder="*********" id="inputPassword2" name="inputPassword2"  value="${results.password2}">
+                                        <c:if test="${not empty results.password2Error}">
                                             <div class="invalid-feedback">
                                                     ${results.password2Error}
                                             </div>
                                         </c:if>
                                     </div>
                                 </div>
+                                <!-- birthday -->
+<%--                                <div class="mb-4">--%>
+<%--                                    <label for="inputbirthday" class="form-label">Birthday *</label>--%>
+<%--                                    <div class="input-group input-group-lg">--%>
+<%--                                        <span class="input-group-text bg-light rounded-start border-0 text-secondary px-3"><i class="fa fa-calendar"></i></span>--%>
+<%--                                        <input  type="text" class="form-control border-0 bg-light rounded-end ps-1 <c:if test="${not empty results.birthdayError}">is-invalid</c:if>" placeholder="MM-DD-YYYY" id="inputbirthday" name="inputbirthday" value="${results.birthday}">--%>
+<%--                                        <c:if test="${not empty results.birthdayError}">--%>
+<%--                                            <div class="invalid-feedback">--%>
+<%--                                                    ${results.birthdayError}--%>
+<%--                                            </div>--%>
+<%--                                        </c:if>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
                                 <!-- Check box -->
                                 <div class="mb-4">
                                     <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="checkbox-1" name="termsOfService" <c:if test="${not empty results.agreeError}">is-invalid</c:if>value="${results.termsOfService == "agree" ? "checked" : ""}">
+                                        <input type="checkbox" class="form-check-input <c:if test="${not empty results.agreeError}">is-invalid</c:if>" id="checkbox-1" name="checkbox-1" value="agree" <c:if test="${results.agree eq 'true'}">checked</c:if>>
                                         <label class="form-check-label" for="checkbox-1">By signing up, you agree to the <a href="${appURL}/terms">terms and conditions</a></label>
                                         <c:if test="${not empty results.agreeError}">
                                             <div class="invalid-feedback">
@@ -66,7 +78,7 @@
                                 <!-- Button -->
                                 <div class="align-items-center mt-0">
                                     <div class="d-grid">
-                                        <button class="btn btn-primary mb-0" type="submit">Sign Up</button>
+                                        <button class="btn btn-orange mb-0" type="submit">Sign Up</button>
                                     </div>
                                 </div>
                             </form>
@@ -83,5 +95,4 @@
         </div>
     </section>
 </main>
-<%@include file="/WEB-INF/anime/footer.jsp"%>
 <%@include file="/WEB-INF/anime/bottom.jsp"%>

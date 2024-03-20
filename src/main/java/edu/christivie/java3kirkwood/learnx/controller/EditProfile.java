@@ -1,5 +1,6 @@
 package edu.christivie.java3kirkwood.learnx.controller;
 
+import edu.christivie.java3kirkwood.learnx.data.UserDAO;
 import edu.christivie.java3kirkwood.learnx.models.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,6 +23,30 @@ public class EditProfile extends HttpServlet {
             resp.sendRedirect("signin?redirect=edit-profile");
             return;
         }
+        req.setAttribute("pageTitle", "Edit Profile");
+        req.getRequestDispatcher("WEB-INF/learnx/edit-profile.jsp").forward(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String firstName = req.getParameter("firstNameInput");
+        String lastName = req.getParameter("lastNameInput");
+        String email = req.getParameter("emailInput");
+        String phone = req.getParameter("phoneInput");
+        String language = req.getParameter("languageInput");
+
+        HttpSession session= req.getSession();
+        User userFromSession =(User)session.getAttribute("activeUser");
+        userFromSession.setFirstName(firstName);
+        userFromSession.setLastName(lastName);
+        userFromSession.setEmail(email);
+        userFromSession.setPhone(phone);
+        userFromSession.setLanguage(language);
+
+        // To Do: validate  ans sanitize users inputs
+        UserDAO.update(userFromSession);
+        session.setAttribute("activeUser", userFromSession);
+
         req.setAttribute("pageTitle", "Edit Profile");
         req.getRequestDispatcher("WEB-INF/learnx/edit-profile.jsp").forward(req, resp);
     }

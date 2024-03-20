@@ -2,7 +2,7 @@
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
         <div class="col-md-3 mb-2 mb-md-0">
             <a href="${appURL}/anime" class="d-inline-flex link-body-emphasis text-decoration-none">
-                <img src="${appURL}/images/personal_project/anime-logo.png" style="height: 32px" alt="Anime Logo">
+                <img src="${appURL}/images/personal_project/icon.png" style="height: 64px" alt="Anime Logo">
             </a>
         </div>
 
