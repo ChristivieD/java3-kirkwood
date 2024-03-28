@@ -77,7 +77,11 @@ public class User {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+
+        Matcher matcher = MyValidator.phonePattern.matcher(phone);
+        if(!matcher.matches()){
+            throw new IllegalArgumentException("Invalid US phone number");
+        }this.phone = phone;
     }
 
     public char[] getPassword() {
@@ -101,6 +105,10 @@ public class User {
     }
 
     public void setLanguage(String language) {
+        Matcher matcher = MyValidator.languagePattern.matcher(language);
+        if(!matcher.matches()){
+            throw new IllegalArgumentException("Invalid language selection");
+        }
         this.language = language;
     }
 

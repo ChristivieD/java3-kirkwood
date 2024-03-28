@@ -11,10 +11,20 @@ public class Users {
     private String email;
     private char[] password;
     private String birthday;
+    private String picture;
     private String privileges;
     private String status;
     public Users(){
 
+    }
+
+    public Users(int id, String username, char[] password, String birthday, String privileges, String status) {
+        this.user_id = id;
+        this.username = username;
+        this.password = password;
+        this.birthday = birthday;
+        this.privileges = privileges;
+        this. status = status;
     }
 
     @Override
@@ -22,20 +32,16 @@ public class Users {
         return "Users{" +
                 "user_id=" + user_id +
                 ", username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", password=" + password +
-                ", birthday='" + birthday + '\'' +
-                ", privileges='" + privileges + '\'' +
-                ", status='" + status + '\'' +
                 '}';
     }
 
-    public Users(int user_id, String username, String email, char[] password, String birthday, String privileges, String status) {
+    public Users(int user_id, String username, String email, char[] password, String birthday, String picture, String privileges, String status) {
         this.user_id = user_id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.birthday = birthday;
+        this.picture = picture;
         this.privileges = privileges;
         this.status = status;
     }
@@ -61,7 +67,7 @@ public class Users {
     }
 
     public void setEmail(String email) {
-        Pattern pattern = MyValidator.emailPattern;
+        Pattern pattern = MyValidator   .emailPattern;
         Matcher matcher = pattern.matcher(email);
         if (!matcher.matches()) {
             throw new IllegalArgumentException("Invalid email address");
@@ -91,6 +97,13 @@ public class Users {
         this.birthday = birthday;
     }
 
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
     public String getPrivileges() {
         return privileges;
     }

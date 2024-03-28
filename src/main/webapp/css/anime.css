@@ -1,24 +1,27 @@
 main {
     min-height: 250px;
 }
-.btn-darkred{
-
+.btn-darkred {
     background-color: darkred;
     color: white;
 }
-.btn-outline-darkred{
+.btn-outline-darkred {
     border-color: darkred;
     outline-color: darkred;
     color: darkred;
     font-weight: bold;
 }
-.nav-link{
+.nav-link {
     color: darkred !important;
 }
-.link-dark{
+.link-dark {
     border-bottom: 1px solid darkred;
     padding-bottom: 3px;
 }
-.nav-logo{
+.nav-logo {
     height: 32px;
+}
+.invalid-feedback,
+.form-check-input.is-invalid ~ .form-check-label {
+    color: darkred;
 }

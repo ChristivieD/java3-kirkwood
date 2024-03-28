@@ -11,31 +11,55 @@
                         <h3 class="card-header-title">${pageTitle}</h3>
                     </div>
                     <div class="card-body">
+                        <c:if test="${not empty flashMessageSuccess}">
+                            <div class="alert alert-success">
+                                ${fashMessageSuccess}
+                            </div>
+                            <c:remove var="fashMessageSuccess"></c:remove>
+                        </c:if>
+                        <c:if test="${not empty flashMessageWarning}">
+                            <div class="alert alert-success">
+                                ${fashMessageWarning}
+                            </div>
+                            <c:remove var="fashMessageWarning"></c:remove>
+                        </c:if>
                         <form action="${appURL}/edit-profile" method="POST">
                             <div class="row g-4">
                                 <!-- First Name -->
                                 <div class="col-md-6">
                                     <label for="firstNameInput" class="form-label">First Name</label>
-                                    <input type="text" class="form-control" id="firstNameInput" name="firstNameInput" value="${activeUser.firstName}">
+                                    <input type="text" class="form-control" id="firstNameInput" name="firstNameInput" value="${fn:escapeXml(activeUser.firstName)}">
+                                    <c:if test="${not empty results.firstNameError}"><div class="invalid-feedback">${results.firstNameError}
+                                    </div>
+                                    </c:if>
                                 </div>
                                 <!-- Last Name -->
                                 <div class="col-md-6">
                                     <label for="lastNameInput" class="form-label">Last Name</label>
-                                    <input type="text" class="form-control" id="lastNameInput" name="lastNameInput" value="${activeUser.lastName}"></div>
-                                <!-- Email id -->
-                                <div class="col-md-6">
-                                    <label class="form-label" for="emailInput">Email</label>
-                                    <input class="form-control" type="text" id="emailInput" name="emailInput" value="${activeUser.email}">
+                                    <input type="text" class="form-control" id="lastNameInput" name="lastNameInput" value="${fn:escapeXml(activeUser.lastName)}">
+                                    <c:if test="${not empty results.lastNameError}">
+                                        <div class="invalid-feedback">${results.lastNameError}
+                                        </div>
+                                    </c:if>
                                 </div>
-                                <!-- Phone number -->
-                                <div class="col-md-6">
-                                    <label class="form-label" for="phoneInput">Phone number</label>
-                                    <input type="text" class="form-control" id="phoneInput" name="phoneInput" value="${activeUser.phone}">
-                                </div>
+
                                 <!-- select menu-->
                                 <div class="col-md-6">
                                     <label for="languageInput" class="form-label">Language</label>
-                                    <select name="languageInput" id="languageInput" class="form-select">
+                                    <select name="languageInput" id="languageInput" class="form-select is-invalid <c:if test="${not empty results.languageError}"></c:if>">
+                                        <option value="en-US" ${activeUser.language eq 'en-US' ? 'selected' : ''}>English</option>
+                                        <option value="fr-FR" ${activeUser.language eq 'fr-FR' ? 'selected' : ''}>French</option>
+                                        <option value="es-ES"${activeUser.language eq 'es-ES' ? 'selected' : ''}>Spanish</option>
+                                    </select>
+                                    <c:if test="${not empty results.languageError }">
+                                        <div class="invalid-feedback">${results.languageError}
+                                        </div>
+                                    </c:if>
+                                </div>
+                                <!-- time zone menu-->
+                                <div class="col-md-6">
+                                    <label for="timeZoneInput" class="form-label">TIme Zone</label>
+                                    <select name="timeZoneInput" id="timeZoneInput" class="form-select">
                                         <option value="en-US" ${activeUser.language eq 'en-US' ? 'selected' : ''}>English</option>
                                         <option value="fr-FR" ${activeUser.language eq 'fr-FR' ? 'selected' : ''}>French</option>
                                         <option value="es-ES"${activeUser.language eq 'es-ES' ? 'selected' : ''}>Spanish</option>

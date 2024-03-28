@@ -10,6 +10,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @WebServlet("/edit-profile")
 public class EditProfile extends HttpServlet {
@@ -31,22 +33,31 @@ public class EditProfile extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String firstName = req.getParameter("firstNameInput");
         String lastName = req.getParameter("lastNameInput");
-        String email = req.getParameter("emailInput");
-        String phone = req.getParameter("phoneInput");
         String language = req.getParameter("languageInput");
+        String timeZone = req.getParameter("timeZoneInput");
 
         HttpSession session= req.getSession();
         User userFromSession =(User)session.getAttribute("activeUser");
-        userFromSession.setFirstName(firstName);
-        userFromSession.setLastName(lastName);
-        userFromSession.setEmail(email);
-        userFromSession.setPhone(phone);
-        userFromSession.setLanguage(language);
 
         // To Do: validate  ans sanitize users inputs
+        Map<String, String> results = new HashMap<>();
+
+        userFromSession.setFirstName(firstName);
+        userFromSession.setLastName(lastName);
+        userFromSession.setLanguage(language);
+        // To =- do add timeZone property
+        if(!results.containsKey("languageError")){
+            UserDAO.update(userFromSession);
+            session .setAttribute("activeUser", userFromSession);
+            session.setAttribute("flashMessageSuccess", "You profile was updated");
+        }else{
+            session.setAttribute("editProfileWarning", "Your profile was not updated");
+        }
+
         UserDAO.update(userFromSession);
         session.setAttribute("activeUser", userFromSession);
 
+        req.setAttribute("results",results);
         req.setAttribute("pageTitle", "Edit Profile");
         req.getRequestDispatcher("WEB-INF/learnx/edit-profile.jsp").forward(req, resp);
     }

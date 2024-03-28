@@ -10,7 +10,7 @@
             <hr>
             <div class="card">
                 <div class="card-body">
-                    <h1 class="card-title">${activeUser.firstName} ${activeUser.lastName}</h1>
+                    <h1 class="card-title"> ${fn:escapeXml(activeUser.firstName)}&nbsp;${fn:escapeXml(activeUser.lastName)}</h1>
                     <ul class="list-inline">
                         <li class="list-inline-item"><i class="fas fa-star"></i>Member since ${activeUser.created_at}</li>
                     </ul>

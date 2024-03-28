@@ -12,3 +12,4 @@
 <link rel="stylesheet" href="${appURL}/css/loading.css">
 </head>
 <body>
+<%@include file="top-nav.jsp"%>
