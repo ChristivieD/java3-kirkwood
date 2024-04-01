@@ -8,13 +8,13 @@ public class Course {
     private String picture;
     private String teacherFirstName;
     private String teacherLastName;
-    private int category_id;
+    private int categoryId;
     private String categoryName;
 
     public Course() {
     }
 
-    public Course(int id, String name, String description, String level, String picture, String teacherFirstName, String teacherLastName, int category_id, String categoryName) {
+    public Course(int id, String name, String description, String level, String picture, String teacherFirstName, String teacherLastName, int categoryId, String categoryName) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -22,7 +22,7 @@ public class Course {
         this.picture = picture;
         this.teacherFirstName = teacherFirstName;
         this.teacherLastName = teacherLastName;
-        this.category_id = category_id;
+        this.categoryId = categoryId;
         this.categoryName = categoryName;
     }
 
@@ -82,12 +82,12 @@ public class Course {
         this.teacherLastName = teacherLastName;
     }
 
-    public int getCategory_id() {
-        return category_id;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory_id(int category_id) {
-        this.category_id = category_id;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getCategoryName() {
@@ -108,7 +108,7 @@ public class Course {
                 ", picture='" + picture + '\'' +
                 ", teacherFirstName='" + teacherFirstName + '\'' +
                 ", teacherLastName='" + teacherLastName + '\'' +
-                ", category_id=" + category_id +
+                ", category_id=" + categoryId +
                 ", categoryName='" + categoryName + '\'' +
                 '}';
     }

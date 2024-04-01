@@ -1,6 +1,7 @@
 package edu.christivie.java3kirkwood.learnx.data;
 
 import edu.christivie.java3kirkwood.learnx.models.Course;
+import edu.christivie.java3kirkwood.learnx.models.CourseCategory;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -40,6 +41,24 @@ public class CourseDAO extends Database{
             System.out.println(e.getMessage());
         }
         return courses;
+    }
+    public static List<CourseCategory> getAllCategories(){
+        List<CourseCategory> categories = new ArrayList<>();
+        try(Connection connection = getConnection();
+        CallableStatement statement = connection.prepareCall("CALL sp_get_all_course_categories");
+        ResultSet resultSet = statement.executeQuery();
+        ){
+            while(resultSet.next()){
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                int numCourses = resultSet.getInt("num_courses");
+                categories.add(new CourseCategory(id,name,numCourses));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return categories;
     }
     // get single course
     // add new courses
