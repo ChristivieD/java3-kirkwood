@@ -17,10 +17,10 @@ import java.util.Map;
 public class DeleteUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session= req.getSession();
-        User user =(User)session.getAttribute("activeUser");
-        if(user == null){
-            session.setAttribute("flashMessageWarning","You must log in to view this content");
+        HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("activeUser");
+        if (user == null) {
+            session.setAttribute("flashMessageWarning", "You must log in to view this content");
             resp.sendRedirect("access?redirect=delete");
             return;
         }
@@ -30,18 +30,20 @@ public class DeleteUser extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String email = req.getParameter("emailInput");
+        String email = req.getParameter("inputEmail");
 
+        HttpSession session = req.getSession();
+        User activeUser = (User) session.getAttribute("activeUser");
         Map<String, String> results = new HashMap<>();
         results.put("email", email);
 
-        HttpSession session = req.getSession();
-        User activeUser = (User)session.getAttribute("activeUser");
-        if(!email.equals(activeUser.getEmail())) {
-            results.put("emailError", "The value you entered is not the same as <b>'" + activeUser.getEmail() + "'</b>.");
+        if (email == null || email.trim().isEmpty()) {
+            results.put("emailError", "Please enter your email address.");
+        } else if (!email.equals(activeUser.getEmail())) {
+            results.put("emailError", "The email address you entered does not match the active user's email.");
         }
 
-        if(!results.containsKey("emailError")) {
+        if (!results.containsKey("emailError")) {
             UsersDAO.delete(activeUser);
             session.invalidate();
             session = req.getSession();

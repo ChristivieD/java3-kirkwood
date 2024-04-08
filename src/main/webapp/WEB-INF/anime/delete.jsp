@@ -1,6 +1,5 @@
-<%@include file="/WEB-INF/anime/top.jsp"%>
 <main class="container">
-    <jsp:include page="leftSideBarHeader.jsp"> </jsp:include>
+    <jsp:include page="leftSideBarHeader.jsp"></jsp:include>
     <!-- =======================
     Page content START -->
     <section class="pt-0">
@@ -15,21 +14,19 @@
                     <div class="card border bg-transparent rounded-3 mb-0">
                         <!-- Card header -->
                         <div class="card-header bg-transparent border-bottom">
-                            <h3 class="card-header-title mb-0">Delete Account</h3>
+                            <h3 class="card-header-title mb-0">${pageTitle}</h3>
                         </div>
                         <!-- Card body -->
                         <div class="card-body">
-                            <h6>If you delete your account, you will lose your all data.</h6>
+                            <h6>If you delete your account, you will lose all your data.</h6>
                             <form method="POST" action="${appURL}/delete">
-                                <%--Email--%>
+                                <%-- Email --%>
                                 <div class="form-outline mb-4">
-                                    <label for="inputEmail" class="form-label" >Enter your email address to confirm account deletion</label>
+                                    <label for="inputEmail" class="form-label">Enter your email address to confirm account deletion</label>
                                     <div class="input-group input-group-lg">
-                                        <input type="email" class="form-control form-control-lg <c:if test="${not empty results.emailError}">is-invalid</c:if>"  id="inputEmail"  name="inputEmail" value="${results.email}"/>
+                                        <input type="email" class="form-control form-control-lg <c:if test="${not empty results.emailError}">is-invalid</c:if>" id="inputEmail" name="inputEmail" value="${fn:escapeXml(results.email)}"/>
                                         <c:if test="${not empty results.emailError}">
-                                            <div class="invalid-feedback">
-                                                    ${results.emailError}
-                                            </div>
+                                            <div class="invalid-feedback">${results.emailError}</div>
                                         </c:if>
                                     </div>
                                 </div>
@@ -45,4 +42,3 @@
         </div>
     </section>
 </main>
-<%@include file="/WEB-INF/anime/bottom.jsp"%>
