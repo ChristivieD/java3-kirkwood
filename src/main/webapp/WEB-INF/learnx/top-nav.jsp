@@ -11,13 +11,13 @@
             <li><a href="${appURL}/courses" class="nav-link px-2 <c:if test="${pageTitle eq 'Courses'}">link-dark</c:if>">Courses</a></li>
             <c:choose>
                 <c:when test="${sessionScope.activeUser.privileges eq 'student'}">
-                    <li><a href="#" class="nav-link px-2">Student Dashboard</a></li>
+                    <li><a href="/student" class="nav-link px-2 <c:if test="${pageTitle eq 'Student Dashboard'}">link-dark</c:if>">Student Dashboard</a></li>
                 </c:when>
                 <c:when test="${sessionScope.activeUser.privileges eq 'teacher'}">
-                    <li><a href="#" class="nav-link px-2">Teacher Dashboard</a></li>
+                    <li><a href="/teacher" class="nav-link px-2 <c:if test="${pageTitle eq 'Teacher Dashboard'}">link-dark</c:if>">Teacher Dashboard</a></li>
                 </c:when>
                 <c:when test="${sessionScope.activeUser.privileges eq 'admin'}">
-                    <li><a href="#" class="nav-link px-2">Admin Dashboard</a></li>
+                    <li><a href="/admin" class="nav-link px-2 <c:if test="${pageTitle eq 'Admin Dashboard'}">link-dark</c:if>">Admin Dashboard</a></li>
                 </c:when>
             </c:choose>
         </ul>

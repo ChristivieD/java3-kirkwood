@@ -20,7 +20,7 @@
             <h3>Class Demos</h3>
             <div class="list-group">
                 <a href="${appURL}/learnx" class="list-group-item list-group-item-action">LearnX Home</a>
-                <a href="${appURL}/all-users" class="list-group-item list-group-item-action">LearnX Users</a>
+                <a href="${appURL}/all-user" class="list-group-item list-group-item-action">LearnX Users</a>
                 <a href="${appURL}/artist" class="list-group-item list-group-item-action">Artist Json</a>
             </div>
         </div>

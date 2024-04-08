@@ -64,4 +64,15 @@ public class CourseDAO extends Database{
     // add new courses
     // update a course
     // delete a course
+    public static boolean enroll(int studentId, int courseId){
+        try(Connection connection = getConnection();
+            CallableStatement statement = connection.prepareCall("{CALL sp_add_enrollment(?,?)} ");
+            ) { statement.setInt(1,studentId);
+                statement.setInt(2,courseId);
+                int rowsAffected = statement.executeUpdate();
+                return rowsAffected== 1;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

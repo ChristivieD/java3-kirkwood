@@ -5,7 +5,7 @@ import edu.christivie.java3kirkwood.shared.MyValidator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Users {
+public class User {
     private int user_id;
     private String username;
     private String email;
@@ -14,17 +14,33 @@ public class Users {
     private String picture;
     private String privileges;
     private String status;
-    public Users(){
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        Pattern pattern = MyValidator.languagePattern;
+        Matcher matcher = pattern.matcher(language);
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException("Invalid language selection");
+        }
+        this.language = language;
+    }
+
+    private  String language;
+    public User(){
 
     }
 
-    public Users(int id, String username, char[] password, String birthday, String privileges, String status) {
+    public User(int id, String username, char[] password, String birthday, String privileges, String status) {
         this.user_id = id;
         this.username = username;
         this.password = password;
         this.birthday = birthday;
         this.privileges = privileges;
         this. status = status;
+        this.language = language;
     }
 
     @Override
@@ -35,7 +51,7 @@ public class Users {
                 '}';
     }
 
-    public Users(int user_id, String username, String email, char[] password, String birthday, String picture, String privileges, String status) {
+    public User(int user_id, String username, String email, char[] password, String birthday, String picture, String privileges, String status, String language) {
         this.user_id = user_id;
         this.username = username;
         this.email = email;
@@ -44,6 +60,7 @@ public class Users {
         this.picture = picture;
         this.privileges = privileges;
         this.status = status;
+        this.language = language;
     }
 
     public int getUser_id() {
@@ -67,7 +84,7 @@ public class Users {
     }
 
     public void setEmail(String email) {
-        Pattern pattern = MyValidator   .emailPattern;
+        Pattern pattern = MyValidator .emailPattern;
         Matcher matcher = pattern.matcher(email);
         if (!matcher.matches()) {
             throw new IllegalArgumentException("Invalid email address");
@@ -80,11 +97,13 @@ public class Users {
     }
 
     public void setPassword(char[] password) {
-        String passwordStr = String.valueOf(password);
-        Pattern pattern = MyValidator.passwordPattern;
-        Matcher matcher = pattern.matcher(passwordStr);
-        if (!matcher.matches()) {
-            throw new IllegalArgumentException("Password requires 8 characters with at least 3 out 4 (uppercase letter, lowercase letter, number, special character ~`!@#$%^&*()_-+={}[]|\\:;\"'<>,.?/");
+        if(password != null) {
+            String passwordStr = String.valueOf(password);
+            Pattern pattern = MyValidator.passwordPattern;
+            Matcher matcher = pattern.matcher(passwordStr);
+            if (!matcher.matches()) {
+                throw new IllegalArgumentException("Password requires 8 characters with at least 3 out 4 (uppercase letter, lowercase letter, number, special character ~`!@#$%^&*()_-+={}[]|\\:;\"'<>,.?/");
+            }
         }
         this.password = password;
     }

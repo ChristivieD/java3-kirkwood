@@ -1,7 +1,7 @@
-package edu.christivie.java3kirkwood.learnx.controller;
+package edu.christivie.java3kirkwood.anime.controller;
 
-import edu.christivie.java3kirkwood.learnx.data.UserDAO;
-import edu.christivie.java3kirkwood.learnx.models.User;
+import edu.christivie.java3kirkwood.anime.data.UsersDAO;
+import edu.christivie.java3kirkwood.anime.models.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,46 +13,41 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/edit-profile")
-public class EditProfile extends HttpServlet {
+@WebServlet("/editProfile")
+public class EditProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session= req.getSession();
         User userFromSession =(User)session.getAttribute("activeUser");
         if(userFromSession == null){
-            // display a 404 error if not logged in
             session.setAttribute("flashMessageWarning","You must log in to view this content");
-            resp.sendRedirect("signin?redirect=edit-profile");
+            resp.sendRedirect("access?redirect=editProfile");
             return;
         }
         req.setAttribute("pageTitle", "Edit Profile");
-        req.getRequestDispatcher("WEB-INF/learnx/edit-profile.jsp").forward(req, resp);
+        req.getRequestDispatcher("WEB-INF/anime/editProfile.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String firstName = req.getParameter("firstNameInput");
-        String lastName = req.getParameter("lastNameInput");
+        String userName = req.getParameter("userNameInput");
         String language = req.getParameter("languageInput");
         String timeZone = req.getParameter("timeZoneInput");
 
         HttpSession session = req.getSession();
-        User userFromSession = (User) session.getAttribute("activeUser");
+        User userFromSession = (User)session.getAttribute("activeUser");
 
-        // To Do: validate  ans sanitize users inputs
         Map<String, String> results = new HashMap<>();
 
-        userFromSession.setFirstName(firstName);
-        userFromSession.setLastName(lastName);
+        userFromSession.setUsername(userName);
         try {
             userFromSession.setLanguage(language);
         } catch (IllegalArgumentException e) {
             results.put("languageError", e.getMessage());
         }
-        // To-do add timeZone property
 
         if (!results.containsKey("languageError")) {
-            UserDAO.update(userFromSession);
+            UsersDAO.update(userFromSession);
             session.setAttribute("activeUser", userFromSession);
             session.setAttribute("flashMessageSuccess", "Your profile was updated.");
         } else {
@@ -61,6 +56,6 @@ public class EditProfile extends HttpServlet {
 
         req.setAttribute("results", results);
         req.setAttribute("pageTitle", "Edit profile");
-        req.getRequestDispatcher("WEB-INF/learnx/edit-profile.jsp").forward(req, resp);
+        req.getRequestDispatcher("WEB-INF/anime/editProfile.jsp").forward(req, resp);
     }
 }

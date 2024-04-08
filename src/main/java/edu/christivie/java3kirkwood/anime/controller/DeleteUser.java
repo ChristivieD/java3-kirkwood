@@ -1,7 +1,7 @@
-package edu.christivie.java3kirkwood.learnx.controller;
+package edu.christivie.java3kirkwood.anime.controller;
 
-import edu.christivie.java3kirkwood.learnx.data.UserDAO;
-import edu.christivie.java3kirkwood.learnx.models.User;
+import edu.christivie.java3kirkwood.anime.data.UsersDAO;
+import edu.christivie.java3kirkwood.anime.models.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -13,19 +13,19 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet("/delete-account")
-public class DeleteAccount extends HttpServlet {
+@WebServlet("/delete")
+public class DeleteUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session= req.getSession();
         User user =(User)session.getAttribute("activeUser");
         if(user == null){
             session.setAttribute("flashMessageWarning","You must log in to view this content");
-            resp.sendRedirect("signin?redirect=delete-account");
+            resp.sendRedirect("access?redirect=delete");
             return;
         }
-        req.setAttribute("pageTitle", "Delete Profile");
-        req.getRequestDispatcher("WEB-INF/learnx/delete-account.jsp").forward(req, resp);
+        req.setAttribute("pageTitle", "Delete Account");
+        req.getRequestDispatcher("WEB-INF/anime/delete.jsp").forward(req, resp);
     }
 
     @Override
@@ -42,16 +42,16 @@ public class DeleteAccount extends HttpServlet {
         }
 
         if(!results.containsKey("emailError")) {
-            UserDAO.delete(activeUser);
+            UsersDAO.delete(activeUser);
             session.invalidate();
             session = req.getSession();
             session.setAttribute("flashMessageWarning", "Your account has been deleted.");
-            resp.sendRedirect("learnx");
+            resp.sendRedirect("anime");
             return;
         }
 
         req.setAttribute("results", results);
         req.setAttribute("pageTitle", "Delete Account");
-        req.getRequestDispatcher("WEB-INF/learnx/delete-account.jsp").forward(req, resp);
+        req.getRequestDispatcher("WEB-INF/anime/delete.jsp").forward(req, resp);
     }
 }

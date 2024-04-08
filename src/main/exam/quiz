@@ -4,7 +4,7 @@ Tell me 3 security-related things you would do on a real production database. Ta
 
 the passwords should not contain the username and it should be at least 8 characters long
 enable logging feature provided by azure You need to limit the IP addresses that are available to access your database.
-the .env file should be only accessible by users and application
+the .env file should be only accessible by user and application
 Which JSTL core (c) tag is used to create conditional if-else statements in a Java Server Page (JSP)?
 -- java--
 <c:choose>

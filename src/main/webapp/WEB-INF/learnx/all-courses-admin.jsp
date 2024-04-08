@@ -2,7 +2,7 @@
 <main>
     <div class="container">
         <h1>${pageTitle}</h1>
-        <p> There are ${users.size() == 1 ? "is" : "are"} &nbsp${courses.size()} course${courses.size() != 1 ? "s" : ""}</p>
+        <p> There are ${user.size() == 1 ? "is" : "are"} &nbsp${courses.size()} course${courses.size() != 1 ? "s" : ""}</p>
         <div class="row">
             <div class="col-xl-12">
                 <div class="table-responsive">

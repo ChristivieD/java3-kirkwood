@@ -1,8 +1,8 @@
 <%@include file="/WEB-INF/learnx/top.jsp" %>
 <main>
     <div class="container">
-        <h1>All users</h1>
-        <p> There are ${users.size() == 1 ? "is" : "are"} &nbsp${users.size()} user${users.size() != 1 ? "s" : ""}</p>
+        <h1>All user</h1>
+        <p> There are ${user.size() == 1 ? "is" : "are"} &nbsp${user.size()} user${user.size() != 1 ? "s" : ""}</p>
         <div class="row">
             <div class="col-xl-12">
                 <div class="table-responsive">
@@ -23,7 +23,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${users}" var="user">
+                        <c:forEach items="${user}" var="user">
                             <tr>
                                 <td>${user.id}</td>
                                 <td>${user.firstName}</td>

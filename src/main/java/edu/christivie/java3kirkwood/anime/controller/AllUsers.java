@@ -1,13 +1,13 @@
 package edu.christivie.java3kirkwood.anime.controller;
 
-import edu.christivie.java3kirkwood.anime.models.Users;
+import edu.christivie.java3kirkwood.anime.models.User;
 import edu.christivie.java3kirkwood.anime.data.UsersDAO;
-import edu.christivie.java3kirkwood.learnx.models.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,7 +17,14 @@ public class AllUsers extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Users> user = UsersDAO.getAll();
+        HttpSession session = req.getSession();
+        User userFromSession = (User)session.getAttribute("activeUser");
+        if(userFromSession == null || !userFromSession.getStatus().equals("active") || !userFromSession.getPrivileges().equals("admin")) {
+            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
+
+        List<User> user = UsersDAO.getAll();
         user.forEach(System.out::println);
         req.setAttribute("user", user);
         req.setAttribute("pageTitle","All Users");

@@ -1,10 +1,9 @@
-<%@include file="top.jsp"%>
+<%@include file="/WEB-INF/anime/top.jsp"%>
 <main>
-    <%@include file="left-side-bar-header.jsp"%>
-    <div class="container">
+    <%@include file="leftSideBar.jsp"%>
+    <div class=" container">
         <div class="row">
-            <%@include file="left-side-bar.jsp"%>
-
+            <%@include file="leftSideBar.jsp"%>
             <div class="col-xl-9">
                 <div class="card border rounded-3">
                     <div class="card-header border-bottom">
@@ -13,36 +12,27 @@
                     <div class="card-body">
                         <c:if test="${not empty flashMessageSuccess}">
                             <div class="alert alert-success">
-                                ${fashMessageSuccess}
+                                    ${flashMessageSuccess}
                             </div>
-                            <c:remove var="fashMessageSuccess"></c:remove>
+                            <c:remove var="flashMessageSuccess"></c:remove>
                         </c:if>
                         <c:if test="${not empty flashMessageWarning}">
                             <div class="alert alert-success">
-                                ${fashMessageWarning}
+                                    ${flashMessageWarning}
                             </div>
-                            <c:remove var="fashMessageWarning"></c:remove>
+                            <c:remove var="flashMessageWarning"></c:remove>
                         </c:if>
+
                         <form action="${appURL}/edit-profile" method="POST">
                             <div class="row g-4">
-                                <!-- First Name -->
+                                <!-- User Name -->
                                 <div class="col-md-6">
-                                    <label for="firstNameInput" class="form-label">First Name</label>
-                                    <input type="text" class="form-control" id="firstNameInput" name="firstNameInput" value="${fn:escapeXml(activeUser.firstName)}">
-                                    <c:if test="${not empty results.firstNameError}"><div class="invalid-feedback">${results.firstNameError}
+                                    <label for="userNameInput" class="form-label">User Name</label>
+                                    <input type="text" class="form-control" id="userNameInput" name="userNameInput" value="${fn:escapeXml(activeUser.userName)}">
+                                    <c:if test="${not empty results.userNameError}"><div class="invalid-feedback">${results.userNameError}
                                     </div>
                                     </c:if>
                                 </div>
-                                <!-- Last Name -->
-                                <div class="col-md-6">
-                                    <label for="lastNameInput" class="form-label">Last Name</label>
-                                    <input type="text" class="form-control" id="lastNameInput" name="lastNameInput" value="${fn:escapeXml(activeUser.lastName)}">
-                                    <c:if test="${not empty results.lastNameError}">
-                                        <div class="invalid-feedback">${results.lastNameError}
-                                        </div>
-                                    </c:if>
-                                </div>
-
                                 <!-- select menu-->
                                 <div class="col-md-6">
                                     <label for="languageInput" class="form-label">Language</label>
@@ -51,7 +41,7 @@
                                         <option value="fr-FR" ${activeUser.language eq 'fr-FR' ? 'selected' : ''}>French</option>
                                         <option value="es-ES"${activeUser.language eq 'es-ES' ? 'selected' : ''}>Spanish</option>
                                     </select>
-                                    <c:if test="${not empty results.languageError }">
+                                    <c:if test="${not empty results.languageError}">
                                         <div class="invalid-feedback">${results.languageError}
                                         </div>
                                     </c:if>
@@ -74,4 +64,4 @@
         </div>
     </div>
 </main>
-<%@include file="bottom.jsp"%>
+<%@include file="/WEB-INF/anime/bottom.jsp"%>

@@ -1,7 +1,7 @@
 package edu.christivie.java3kirkwood.anime.controller;
 
 import edu.christivie.java3kirkwood.anime.data.UsersDAO;
-import edu.christivie.java3kirkwood.anime.models.Users;
+import edu.christivie.java3kirkwood.anime.models.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -35,18 +35,18 @@ public class NewUser extends HttpServlet {
         results.put("email",email);
         results.put("password1",password1);
         results.put("password2",password2);
-        Users users = new Users();
+        User user = new User();
         try{
-            users.setEmail(email);
+            user.setEmail(email);
         }catch(IllegalArgumentException e){
             results.put("emailError",e.getMessage());
         }
-        Users userFromDatabase = UsersDAO.get(email);
+        User userFromDatabase = UsersDAO.get(email);
         if(userFromDatabase != null){
             results.put("emailError", "User already exists");
         }
         try{
-            users.setPassword(password1.toCharArray());
+            user.setPassword(password1.toCharArray());
 
         }catch (IllegalArgumentException e){
             results.put("password1Error", e.getMessage());
@@ -68,7 +68,7 @@ public class NewUser extends HttpServlet {
                 !results.containsKey("password2Error") &&
                 !results.containsKey("agreeError")
         ){
-            String code = UsersDAO.add(users);
+            String code = UsersDAO.add(user);
             if(!code.equals("")){
                 HttpSession session = req.getSession();
                 session.invalidate();

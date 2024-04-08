@@ -1,8 +1,8 @@
 package edu.christivie.java3kirkwood.anime.controller;
 
 import edu.christivie.java3kirkwood.anime.data.UsersDAO;
-import edu.christivie.java3kirkwood.anime.models.Users;
-import edu.christivie.java3kirkwood.shared.CommunicationService;
+import edu.christivie.java3kirkwood.anime.models.User;
+import edu.christivie.java3kirkwood.shared.ComServices;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -24,7 +24,7 @@ public class FactorAuthCode extends HttpServlet {
             String codeFromSession = (String)session.getAttribute("code");
             if(codeFromSession != null && !codeFromSession.equals("")){
                 String email = (String)session.getAttribute("email");
-                CommunicationService.sendNewUserEmail(email,codeFromSession);
+                ComServices.sendNewUserEmail(email,codeFromSession);
                 req.setAttribute("emailSent","A new email was sent with your access code");
             }
         }
@@ -45,7 +45,7 @@ public class FactorAuthCode extends HttpServlet {
             results.put("codeError","That code is not correct");
         }else{
             String email = (String)session.getAttribute("email");
-            Users userFromDatabase = UsersDAO.get(email);
+            User userFromDatabase = UsersDAO.get(email);
             userFromDatabase.setStatus("active");
             userFromDatabase.setPrivileges("user");
             UsersDAO.update(userFromDatabase);

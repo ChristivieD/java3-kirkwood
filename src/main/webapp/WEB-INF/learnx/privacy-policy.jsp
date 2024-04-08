@@ -40,8 +40,8 @@
                 <p>If you leave a comment, the comment and its metadata are retained indefinitely. This is so we can
                     recognize and approve any follow-up comments automatically instead of holding them in a
                     moderation queue.</p>
-                <p>For users that register on our website (if any), we also store the personal information they
-                    provide in their user profile. All users can see, edit, or delete their personal information at
+                <p>For user that register on our website (if any), we also store the personal information they
+                    provide in their user profile. All user can see, edit, or delete their personal information at
                     any time (except they cannot change their username). Website administrators can also see and
                     edit that information.</p>
 

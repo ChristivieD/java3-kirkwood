@@ -13,6 +13,17 @@
             <li><a href="${appURL}/New" class="nav-link px-2">New</a></li>
             <li><a href="${appURL}/Coming soon" class="nav-link px-2">Coming Soon</a></li>
             <li><a href="${appURL}/Search" class="nav-link px-2">Search</a></li>
+            <c:choose>
+                <c:when test="${sessionScope.activeUser.privileges eq 'user'}">
+                    <li><a href="/user" class="nav-link px-2 <c:if test="${pageTitle eq 'User Dashboard'}">link-dark</c:if>">User Dashboard</a></li>
+                </c:when>
+                <c:when test="${sessionScope.activeUser.privileges eq 'premium'}">
+                    <li><a href="/premium" class="nav-link px-2 <c:if test="${pageTitle eq 'Premium Dashboard'}">link-dark</c:if>">Premium Dashboard</a></li>
+                </c:when>
+                <c:when test="${sessionScope.activeUser.privileges eq 'admin'}">
+                    <li><a href="/admin" class="nav-link px-2 <c:if test="${pageTitle eq 'Admin Dashboard'}">link-dark</c:if>">Admin Dashboard</a></li>
+                </c:when>
+            </c:choose>
         </ul>
 
         <div class="col-md-3 text-end">
@@ -23,7 +34,7 @@
                 </c:when>
                 <c:otherwise>
                     <a href="${appURL}/sign-out" class="btn btn-outline-darkred me-2">Sign Out</a>
-                    <a href="${appURL}/edit-profile" class="btn btn-darkred">Edit Profile</a>
+                    <a href="${appURL}/editProfile" class="btn btn-darkred">Edit Profile</a>
                 </c:otherwise>
             </c:choose>
         </div>

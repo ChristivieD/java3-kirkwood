@@ -3,7 +3,7 @@
     <section class="p-0 d-flex align-items-center justify-content-center position-relative overflow-hidden" style="border-radius: 1rem; background: linear-gradient(135deg,#007bff,#ff4500, #ffffff);  width: 70%;">
         <div class="container py-5">
             <div class="row ">
-                <div class="col-sm-6 text-black">
+                <div class="col-md-6 col-sm-12 text-black">
                     <div class="col-12 col-lg-8 m-auto">
                         <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
                         <span class="h1 fw-bold mb-0">Welcome to View Anime!!</span>
@@ -32,7 +32,7 @@
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="inputEmail">Email address</label>
                                 <div class="input-group input-group-lg">
-                                    <input type="email" id="inputEmail" class="form-control form-control-lg" value="${results.email}"/>
+                                    <input type="email" id="inputEmail" class="form-control form-control-lg" name="inputEmail" value="${results.email}"/>
                                 </div>
                             </div>
                             <!-- Password -->
@@ -61,7 +61,7 @@
 
                     <!-- Sign in link -->
                     <div class="mt-4 text-center">
-                        <span>Forgot your password? <a href="${appURL}/reset-password">Reset it here</a></span>
+                        <span>Forgot your password? <a href="${appURL}/password-reset">Reset it here</a></span>
                     </div>
                 </div>
                 <div class="col-md-6 col-lg-5 d-flex align-items-center justify-content-center">

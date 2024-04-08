@@ -1,7 +1,7 @@
 package edu.christivie.java3kirkwood.anime.controller;
 
 import edu.christivie.java3kirkwood.anime.data.UsersDAO;
-import edu.christivie.java3kirkwood.anime.models.Users;
+import edu.christivie.java3kirkwood.anime.models.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -35,7 +35,7 @@ public class Login extends HttpServlet {
         if(remember != null && remember[0].equals("yes")) {
             results.put("remember", "yes");
         }
-        Users userFromDatabase = UsersDAO.get(email);
+        User userFromDatabase = UsersDAO.get(email);
         if(userFromDatabase == null) {
             results.put("loginError", "The email or password you entered is not correct");
         } else {
@@ -63,7 +63,7 @@ public class Login extends HttpServlet {
                 }
             }
         }
-        req.setAttribute("redirect",redirect);
+        req.setAttribute("results",results);
         req.setAttribute("pageTitle","Sign In");
         req.getRequestDispatcher("WEB-INF/anime/access.jsp").forward(req,resp);
     }
