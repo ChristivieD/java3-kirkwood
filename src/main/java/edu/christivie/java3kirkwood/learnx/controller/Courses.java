@@ -3,14 +3,18 @@ package edu.christivie.java3kirkwood.learnx.controller;
 import edu.christivie.java3kirkwood.learnx.data.CourseDAO;
 import edu.christivie.java3kirkwood.learnx.models.Course;
 import edu.christivie.java3kirkwood.learnx.models.CourseCategory;
+import edu.christivie.java3kirkwood.learnx.models.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.List;
+import java.util.TreeMap;
 
 @WebServlet("/courses")
 public class Courses extends HttpServlet {
@@ -30,6 +34,12 @@ public class Courses extends HttpServlet {
         int offset = 0;
         List<Course> courses = CourseDAO.get(limit, offset, categoryFilter, skillFilter);
         List<CourseCategory> categories = CourseDAO.getAllCategories();
+        HttpSession session = req.getSession();
+        User userFromSession = (User)session.getAttribute("activeUser");
+        if(userFromSession != null) {
+            TreeMap<Course, Instant> enrollments = CourseDAO.getCoursesEnrolled(limit, offset, userFromSession.getId());
+            req.setAttribute("enrollments", enrollments);
+        }
 
         req.setAttribute("courses", courses);
         req.setAttribute("categories", categories);

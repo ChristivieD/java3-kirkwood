@@ -16,7 +16,7 @@ public class Enroll extends HttpServlet {
     private  boolean isNumber(String str){
         try{
             Integer.parseInt(str);
-        }catch (Exception ex){
+        }catch (NumberFormatException ex){
             return false;
         }
         return true;
