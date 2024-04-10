@@ -21,6 +21,19 @@ public class User {
     public User(){
 
     }
+
+    public User(int id, String firstName, String lastName, String email, String phone, char[] password, String language, String status, String privileges) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.password = password;
+        this.language = language;
+        this.status = status;
+        this.privileges = privileges;
+    }
+
     public User(int id, String firstName, String lastName, String email, String phone, char[] password, String language, String status, String privileges, Instant created_at, Instant last_logged_in, Instant update_at) {
         this.id = id;
         this.firstName = firstName;
@@ -117,6 +130,8 @@ public class User {
     }
 
     public void setStatus(String status) {
+
+        // todo : validate string
         this.status = status;
     }
 
@@ -125,6 +140,8 @@ public class User {
     }
 
     public void setPrivileges(String privileges) {
+
+        // todo : validate string
         this.privileges = privileges;
     }
 

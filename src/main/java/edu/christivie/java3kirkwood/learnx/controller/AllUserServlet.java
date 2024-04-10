@@ -16,20 +16,18 @@ import java.util.List;
 public class AllUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session= req.getSession();
-        User userFromSession =(User)session.getAttribute("activeUser");
-        if(userFromSession == null || !userFromSession.getStatus().equals("active") || !userFromSession.getPrivileges().equals("admin")){
-            // redirect non-logged in user to the login page
+//        HttpSession session= req.getSession();
+//        User userFromSession =(User)session.getAttribute("activeUser");
+//        if(userFromSession == null || !userFromSession.getStatus().equals("active") || !userFromSession.getPrivileges().equals("admin")){
+//             redirect non-logged in user to the login page
 //            session.setAttribute("flashMessageWarning","You must log in to view this content");
 //            resp.sendRedirect("signin");
 //            return;
-            // display a 404 error if not logged in
-            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
-            return;
-        }
-
+//             display a 404 error if not logged in
+//            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
+//            return;
+//        }
         List<User> users = UserDAO.getAll();
-        users.forEach(System.out::println);
         req.setAttribute("users", users);
         req.setAttribute("pageTitle","All Users");
         req.getRequestDispatcher("WEB-INF/learnx/all-users.jsp").forward(req,resp);
