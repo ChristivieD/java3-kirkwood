@@ -14,7 +14,7 @@ import java.util.TreeMap;
 
 public class AnimeDAO extends Database1 {
     public static void main(String[] args) {
-        List<Anime> courses = get(5, 0, "", "");
+        List<Anime> courses = get(10, 0, "", "");
         courses.forEach(System.out::println);
     }
     public static List<Anime> get(int limit, int offset, String genre, String status_type){
