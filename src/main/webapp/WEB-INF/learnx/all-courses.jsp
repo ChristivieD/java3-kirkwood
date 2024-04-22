@@ -9,28 +9,7 @@ Page content START -->
 
                 <!-- Main content START -->
                 <div class="col-xl-9 col-xxl-8">
-
-                    <c:choose>
-                        <c:when test="${not empty flashMessageSuccess}">
-                            <div class="alert alert-success mb-2">
-                                    ${flashMessageSuccess}
-                            </div>
-                            <c:remove var="flashMessageSuccess" scope="session"></c:remove>
-                        </c:when>
-                        <c:when test="${not empty flashMessageWarning}">
-                            <div class="alert alert-warning mb-2">
-                                    ${flashMessageWarning}
-                            </div>
-                            <c:remove var="flashMessageWarning" scope="session"></c:remove>
-                        </c:when>
-                        <c:when test="${not empty flashMessageDanger}">
-                            <div class="alert alert-danger mb-2">
-                                    ${flashMessageDanger}
-                            </div>
-                            <c:remove var="flashMessageDanger" scope="session"></c:remove>
-                        </c:when>
-                    </c:choose>
-
+                    <%@include file="flashMessage.jsp"%>
                     <!-- Course list START -->
                     <div class="row g-4">
                         <c:forEach items="${courses}" var="course">
@@ -66,6 +45,11 @@ Page content START -->
                                                     <!-- Teacher -->
                                                     <div class="d-flex align-items-center">
                                                         <p class="mb-0 ms-2">Taught by: ${course.teacherFirstName}&nbsp;${course.teacherLastName}</p>
+                                                    </div>
+
+                                                    <div class="d-flex align-items-center">
+                                                        <c:set var="cost" value="1234.567"></c:set>
+                                                        <p class="mb-0 ms-2">Cost: <fmt:formatNumber value="${cost}" type="currency" /></p>
                                                     </div>
                                                     <c:if test="${activeUser.privileges eq 'student'}">
                                                         <c:choose>

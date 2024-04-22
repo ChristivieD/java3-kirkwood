@@ -11,6 +11,10 @@ import java.time.Instant;
 import java.util.*;
 
 public class CourseDAO extends Database{
+    public static void main(String[] args) {
+        List<Course> courses = get(5, 0, "", "");
+        courses.forEach(System.out::println);
+    }
     // get all courses
     public static List<Course> get(int limit, int offset,String categories,String skillLevel){
         List<Course> courses = new ArrayList<>();

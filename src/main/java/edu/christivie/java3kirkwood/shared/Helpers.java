@@ -1,5 +1,9 @@
 package edu.christivie.java3kirkwood.shared;
 
+import edu.christivie.java3kirkwood.learnx.models.User;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -21,5 +25,21 @@ public class Helpers {
             }
         }
         return Period.between(birthDate, LocalDate.now()).getYears();
+    }
+    public static User getUserFromSession(HttpServletRequest req){
+        HttpSession session = req.getSession();
+        User userFromSession = (User)session.getAttribute("activeUser");
+        return userFromSession;
+    }
+    public static boolean isActive(){
+        return isActive();
+    }
+    public static String isStudent(){
+        return isStudent();
+    }
+    public static String isTeacher(){
+        return isTeacher();
+    }public static String isAdmin(){
+        return isAdmin();
     }
 }

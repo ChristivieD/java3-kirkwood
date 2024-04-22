@@ -7,11 +7,9 @@
         </div>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="${appURL}" class="nav-link px-2 link-secondary">Home</a></li>
-
-            <li><a href="${appURL}/List" class="nav-link px-2">List</a></li>
-            <li><a href="${appURL}/New" class="nav-link px-2">New</a></li>
-            <li><a href="${appURL}/Coming soon" class="nav-link px-2">Coming Soon</a></li>
+            <li><a href="${appURL}/anime" class="nav-link px-2 link-secondary">Home</a></li>
+            <li><a href="${appURL}/animeList" class="nav-link px-2">List</a></li>
+            <li><a href="${appURL}/comingSoon" class="nav-link px-2">Coming Soon</a></li>
             <li><a href="${appURL}/Search" class="nav-link px-2">Search</a></li>
             <c:choose>
                 <c:when test="${sessionScope.activeUser.privileges eq 'user'}">

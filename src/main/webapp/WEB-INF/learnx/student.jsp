@@ -56,26 +56,7 @@
                     </div>
                     <!-- Card header END -->
 
-                    <c:choose>
-                        <c:when test="${not empty flashMessageSuccess}">
-                            <div class="alert alert-success mb-2">
-                                    ${flashMessageSuccess}
-                            </div>
-                            <c:remove var="flashMessageSuccess" scope="session"></c:remove>
-                        </c:when>
-                        <c:when test="${not empty flashMessageWarning}">
-                            <div class="alert alert-warning mb-2">
-                                    ${flashMessageWarning}
-                            </div>
-                            <c:remove var="flashMessageWarning" scope="session"></c:remove>
-                        </c:when>
-                        <c:when test="${not empty flashMessageDanger}">
-                            <div class="alert alert-danger mb-2">
-                                    ${flashMessageDanger}
-                            </div>
-                            <c:remove var="flashMessageDanger" scope="session"></c:remove>
-                        </c:when>
-                    </c:choose>
+                    <%@include file="flashMessage.jsp"%>
 
                     <!-- Card body START -->
                     <div class="card-body">
@@ -87,9 +68,9 @@
                                 <thead>
                                 <tr>
                                     <th scope="col" class="border-0 rounded-start">Course Title</th>
-                                    <%--                                    <th scope="col" class="border-0">Total Lessons</th>--%>
-                                    <%--                                    <th scope="col" class="border-0">Completed Lessons</th>--%>
-                                    <%--                                    <th scope="col" class="border-0 rounded-end">Percent Complete</th>--%>
+<%--                                    <th scope="col" class="border-0">Total Lessons</th>--%>
+<%--                                    <th scope="col" class="border-0">Completed Lessons</th>--%>
+                                     <th scope="col" class="border-0 rounded-end">Percent Complete</th>
                                 </tr>
                                 </thead>
                                 <!-- Table body START -->
@@ -116,16 +97,17 @@
                                             <%--                                    <td>40</td>--%>
 
                                         <!-- Table data -->
-                                            <%--                                    <td>--%>
-                                            <%--                                        <!-- Info -->--%>
-                                            <%--                                        <div class="overflow-hidden">--%>
-                                            <%--                                            <h6 class="mb-0">85%</h6>--%>
-                                            <%--                                            <div class="progress progress-sm bg-primary bg-opacity-10">--%>
-                                            <%--                                                <div class="progress-bar bg-primary aos" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">--%>
-                                            <%--                                                </div>--%>
-                                            <%--                                            </div>--%>
-                                            <%--                                        </div>--%>
-                                            <%--                                    </td>--%>
+                                        <td>
+                                             <!-- Info -->
+                                             <div class="overflow-hidden">
+                                                 <c:set var="percent_complete" value="0.678408"></c:set>
+                                                <h6 class="mb-0"><fmt:formatNumber type="percent" value="${percent_complete}" maxFractionDigits="2"/></h6>
+                                                 <div class="progress progress-sm bg-primary bg-opacity-10">
+                                                     <div class="progress-bar bg-primary aos" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: ${percent_complete * 100}%" aria-valuenow="${percent_complete * 100}" aria-valuemin="0" aria-valuemax="100">
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                        </td>
                                     </tr>
                                 </c:forEach>
 

@@ -12,7 +12,8 @@
                 <div class="card-body">
                     <h1 class="card-title"> ${fn:escapeXml(activeUser.firstName)}&nbsp;${fn:escapeXml(activeUser.lastName)}</h1>
                     <ul class="list-inline">
-                        <li class="list-inline-item"><i class="fas fa-star"></i>Member since ${activeUser.created_at}</li>
+                        <li class="list-inline-item"><i class="fas fa-star"></i>Member since <fmt:formatDate value="${activeUser.created_at_toDate}" type="date" dateStyle="medium" ></fmt:formatDate></li>
+                        <li class="list-inline-item">Last Updated <fmt:formatDate value="${activeUser.update_at_toDate}" type="both" dateStyle="full" ></fmt:formatDate></li>
                     </ul>
                 </div>
             </div>

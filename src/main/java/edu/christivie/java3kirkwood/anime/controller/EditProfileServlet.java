@@ -17,20 +17,20 @@ import java.util.Map;
 public class EditProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session= req.getSession();
-        User userFromSession =(User)session.getAttribute("activeUser");
-        if(userFromSession == null){
-            session.setAttribute("flashMessageWarning","You must log in to view this content");
+        HttpSession session = req.getSession();
+        User userFromSession = (User)session.getAttribute("activeUser");
+        if(userFromSession == null) {
+            session.setAttribute("flashMessageWarning", "You must be logged in to view this content.");
             resp.sendRedirect("access?redirect=editProfile");
             return;
         }
-        req.setAttribute("pageTitle", "Edit Profile");
+        req.setAttribute("pageTitle", "Edit profile");
         req.getRequestDispatcher("WEB-INF/anime/editProfile.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String userName = req.getParameter("userNameInput");
+        String username = req.getParameter("usernameInput");
         String language = req.getParameter("languageInput");
         String timeZone = req.getParameter("timeZoneInput");
 
@@ -39,14 +39,14 @@ public class EditProfileServlet extends HttpServlet {
 
         Map<String, String> results = new HashMap<>();
 
-        userFromSession.setUsername(userName);
+        userFromSession.setUsername(username);
         try {
             userFromSession.setLanguage(language);
-        } catch (IllegalArgumentException e) {
+        } catch(IllegalArgumentException e) {
             results.put("languageError", e.getMessage());
         }
 
-        if (!results.containsKey("languageError")) {
+        if(!results.containsKey("languageError")) {
             UsersDAO.update(userFromSession);
             session.setAttribute("activeUser", userFromSession);
             session.setAttribute("flashMessageSuccess", "Your profile was updated.");

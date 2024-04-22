@@ -6,7 +6,7 @@
             <%@include file="left-side-bar.jsp"%>
 
             <div class="col-xl-9">
-                <div class="card border rounded-3">
+                <div class="card border rounded-3" >
                     <div class="card-header border-bottom">
                         <h3 class="card-header-title">${pageTitle}</h3>
                     </div>
@@ -29,18 +29,11 @@
                                 <div class="col-md-6">
                                     <label for="firstNameInput" class="form-label">First Name</label>
                                     <input type="text" class="form-control" id="firstNameInput" name="firstNameInput" value="${fn:escapeXml(activeUser.firstName)}">
-                                    <c:if test="${not empty results.firstNameError}"><div class="invalid-feedback">${results.firstNameError}
-                                    </div>
-                                    </c:if>
                                 </div>
                                 <!-- Last Name -->
                                 <div class="col-md-6">
                                     <label for="lastNameInput" class="form-label">Last Name</label>
                                     <input type="text" class="form-control" id="lastNameInput" name="lastNameInput" value="${fn:escapeXml(activeUser.lastName)}">
-                                    <c:if test="${not empty results.lastNameError}">
-                                        <div class="invalid-feedback">${results.lastNameError}
-                                        </div>
-                                    </c:if>
                                 </div>
 
                                 <!-- select menu-->
@@ -50,6 +43,7 @@
                                         <option value="en-US" ${activeUser.language eq 'en-US' ? 'selected' : ''}>English</option>
                                         <option value="fr-FR" ${activeUser.language eq 'fr-FR' ? 'selected' : ''}>French</option>
                                         <option value="es-ES"${activeUser.language eq 'es-ES' ? 'selected' : ''}>Spanish</option>
+                                        <option value="ar"${activeUser.language eq 'ar' ? 'selected' : ''}>Arabic</option>
                                     </select>
                                     <c:if test="${not empty results.languageError }">
                                         <div class="invalid-feedback">${results.languageError}

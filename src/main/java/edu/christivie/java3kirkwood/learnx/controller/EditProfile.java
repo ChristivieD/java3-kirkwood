@@ -2,6 +2,7 @@ package edu.christivie.java3kirkwood.learnx.controller;
 
 import edu.christivie.java3kirkwood.learnx.data.UserDAO;
 import edu.christivie.java3kirkwood.learnx.models.User;
+import edu.christivie.java3kirkwood.shared.Helpers;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,8 +19,8 @@ public class EditProfile extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session= req.getSession();
-        User userFromSession =(User)session.getAttribute("activeUser");
-        if(userFromSession == null){
+        User user = Helpers.getUserFromSession(req);
+        if(user == null){
             // display a 404 error if not logged in
             session.setAttribute("flashMessageWarning","You must log in to view this content");
             resp.sendRedirect("signin?redirect=edit-profile");
@@ -53,6 +54,7 @@ public class EditProfile extends HttpServlet {
 
         if (!results.containsKey("languageError")) {
             UserDAO.update(userFromSession);
+            session.setAttribute("language",userFromSession.getLanguage());
             session.setAttribute("activeUser", userFromSession);
             session.setAttribute("flashMessageSuccess", "Your profile was updated.");
         } else {

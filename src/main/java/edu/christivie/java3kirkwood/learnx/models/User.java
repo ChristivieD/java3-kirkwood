@@ -3,6 +3,7 @@ package edu.christivie.java3kirkwood.learnx.models;
 import edu.christivie.java3kirkwood.shared.MyValidator;
 
 import java.time.Instant;
+import java.util.Date;
 import java.util.regex.Matcher;
 
 public class User {
@@ -149,12 +150,19 @@ public class User {
         return created_at;
     }
 
+    public Date getCreated_at_toDate(){
+        return Date.from(created_at);
+    }
+
     public void setCreated_at(Instant created_at) {
         this.created_at = created_at;
     }
 
     public Instant getLast_logged_in() {
         return last_logged_in;
+    }
+    public Date getLast_logged_in_toDate(){
+        return Date.from(last_logged_in);
     }
 
     public void setLast_logged_in(Instant last_logged_in) {
@@ -164,9 +172,27 @@ public class User {
     public Instant getUpdate_at() {
         return update_at;
     }
+    public Date getUpdate_at_toDate(){
+        return Date.from(update_at);
+    }
+//    public LocalDate getBirthday(){
+//        return birthday;
+//    }
 
     public void setUpdate_at(Instant update_at) {
         this.update_at = update_at;
+    }
+    public static boolean isActive(User user) {
+        return user != null && "active".equalsIgnoreCase(user.getStatus());
+    }
+    public static boolean isStudent(User user) {
+        return isActive(user) && "student".equalsIgnoreCase(user.getPrivileges());
+    }
+    public static boolean isTeacher(User user) {
+        return isActive(user) && "teacher".equalsIgnoreCase(user.getPrivileges());
+    }
+    public static boolean isAdmin(User user) {
+        return isActive(user) && "admin".equalsIgnoreCase(user.getPrivileges());
     }
 
     @Override

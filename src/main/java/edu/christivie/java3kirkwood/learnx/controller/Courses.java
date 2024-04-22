@@ -4,6 +4,7 @@ import edu.christivie.java3kirkwood.learnx.data.CourseDAO;
 import edu.christivie.java3kirkwood.learnx.models.Course;
 import edu.christivie.java3kirkwood.learnx.models.CourseCategory;
 import edu.christivie.java3kirkwood.learnx.models.User;
+import edu.christivie.java3kirkwood.shared.Helpers;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -34,8 +35,7 @@ public class Courses extends HttpServlet {
         int offset = 0;
         List<Course> courses = CourseDAO.get(limit, offset, categoryFilter, skillFilter);
         List<CourseCategory> categories = CourseDAO.getAllCategories();
-        HttpSession session = req.getSession();
-        User userFromSession = (User)session.getAttribute("activeUser");
+        User userFromSession = Helpers.getUserFromSession(req);
         if(userFromSession != null) {
             TreeMap<Course, Instant> enrollments = CourseDAO.getCoursesEnrolled(limit, offset, userFromSession.getId());
             req.setAttribute("enrollments", enrollments);
