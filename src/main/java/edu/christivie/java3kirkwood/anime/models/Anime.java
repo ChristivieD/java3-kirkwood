@@ -1,6 +1,10 @@
 package edu.christivie.java3kirkwood.anime.models;
 
-public class Anime {
+import org.jetbrains.annotations.NotNull;
+
+import java.time.Instant;
+
+public class Anime implements Comparable<Anime>{
     private int anime_id;
     private String release_date;
     private int genre_id;
@@ -10,13 +14,27 @@ public class Anime {
     private String status;
     private String language;
     private String title;
-    public Anime(){}
-    public Anime(int anime_id, String release_date, int genre_id, String description, String rating, String image, String status, String language, String title, String username, String genre_name){}
+    private String genre;
+    public  Anime(){}
+    public Anime(int anime_id, String release_date, int genre_id, String description, String rating, String image, String status, String language, String title, int reviewId, int reviewUserId, String genre_name, String reviewText, Instant reviewPostedAt, String genreName){}
 
-    public Anime(int anime_id, String release_date, int genre_id, String description, String rating, String image, String status, String language, String title) {
+    public Anime(int anime_id, String release_date, int genre_id, String description, String rating, String image, String status, String language, String title, String genre) {
         this.anime_id = anime_id;
         this.release_date = release_date;
         this.genre_id = genre_id;
+        this.description = description;
+        this.rating = rating;
+        this.image = image;
+        this.status = status;
+        this.language = language;
+        this.title = title;
+        this.genre = genre;
+    }
+
+    public Anime(int animeId, String releaseDate, int genreId, String description, String rating, String image, String status, String language, String title) {
+        this.anime_id = animeId ;
+        this.release_date = releaseDate;
+        this.genre_id = genreId;
         this.description = description;
         this.rating = rating;
         this.image = image;
@@ -97,6 +115,14 @@ public class Anime {
         this.title = title;
     }
 
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
     @Override
     public String toString() {
         return "Anime{" +
@@ -109,6 +135,15 @@ public class Anime {
                 ", status='" + status + '\'' +
                 ", language='" + language + '\'' +
                 ", title='" + title + '\'' +
+                ", genre=" + genre +
                 '}';
+    }
+
+    public void add(Review review) {
+    }
+
+    @Override
+    public int compareTo(@NotNull Anime o) {
+        return this.title.compareTo(o.title);
     }
 }

@@ -12,7 +12,8 @@
         <div class="col-xs-12 col-sm-6 col-lg-5 mb-4">
             <h3>Personal Projects</h3>
             <div class="list-group">
-                <a href="${appURL}/email" class="list-group-item list-group-item-action">Assignment 1 -Email</a>
+                <a href="${appURL}/email" class="list-group-item list-group-item-action">Assignment 1-Email</a>
+                <a href="${appURL}/chat" class="list-group-item list-group-item-action">Chat App</a>
                 <a href="${appURL}/anime" class="list-group-item list-group-item-action">Anime</a>
                 <a href="${appURL}/users" class="list-group-item list-group-item-action">Anime Users</a>
             </div>

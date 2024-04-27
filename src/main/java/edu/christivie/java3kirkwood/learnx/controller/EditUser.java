@@ -24,7 +24,7 @@ public class EditUser extends HttpServlet {
         User user = UserDAO.get(id);
         req.setAttribute("user", user);
         String name = (!user.getFirstName().equals("") && !user.getLanguage().equals("") ? user.getFirstName() + " " + user.getLastName(): "User");
-        req.setAttribute("paeTitle","Edit " + name);
+        req.setAttribute("pageTitle","Edit " + name);
         req.getRequestDispatcher("WEB-INF/learnx/edit-user.jsp").forward(req,resp);
     }
 

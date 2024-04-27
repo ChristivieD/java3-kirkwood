@@ -14,7 +14,8 @@ import java.util.List;
 import java.util.UUID;
 
 public class UserDAO extends Database{
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         getAll().forEach(System.out::println);
     }
     public static List<User> getAll(){

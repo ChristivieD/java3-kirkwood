@@ -31,9 +31,15 @@ public class Helpers {
         User userFromSession = (User)session.getAttribute("activeUser");
         return userFromSession;
     }
+    public static boolean isAdmin(HttpServletRequest request){
+        String privileges = (String) request.getSession().getAttribute("privileges");
+        return "admin".equals(privileges);
+    }
+
     public static boolean isActive(){
         return isActive();
     }
+
     public static String isStudent(){
         return isStudent();
     }

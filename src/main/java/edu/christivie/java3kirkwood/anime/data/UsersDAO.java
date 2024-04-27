@@ -15,6 +15,8 @@ import java.util.UUID;
 public class UsersDAO extends Database1 {
     public static void main(String[] args) throws SQLException {
         getAll().forEach(System.out::println);
+        User user = getUserById(1);
+        System.out.println(user);
     }
 
     public static List<User> getAll() {
@@ -64,6 +66,32 @@ public class UsersDAO extends Database1 {
                 return new User(id, username, email, password, birthday, picture, privileges, status,language);
             }
         } catch (SQLException e) {
+            System.out.println("Check your stored procedures");
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public static User getUserById(int id){
+        try(Connection connection = getConnection();
+            CallableStatement statement = connection.prepareCall("{CALL sp_get_user_by_id(?)}");
+        ){
+            statement.setInt(1,id);
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next()){
+                String username = resultSet.getString("username");
+                String email = resultSet.getString("email");
+                char[] password = resultSet.getString("password").toCharArray();
+                String birthday = resultSet.getString("birthday");
+                String picture = resultSet.getString("picture");
+                String privileges = resultSet.getString("privileges");
+                String status = resultSet.getString("status");
+                String language = resultSet.getString("language");
+                return new User(id, username, email, password, birthday, picture, privileges, status,language);
+
+            }
+
+        }catch (SQLException e){
             System.out.println("Check your stored procedures");
             System.out.println(e.getMessage());
         }

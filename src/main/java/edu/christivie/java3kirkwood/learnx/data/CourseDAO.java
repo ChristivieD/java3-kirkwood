@@ -1,5 +1,6 @@
 package edu.christivie.java3kirkwood.learnx.data;
 
+import edu.christivie.java3kirkwood.anime.models.AnimeGenre;
 import edu.christivie.java3kirkwood.learnx.models.Course;
 import edu.christivie.java3kirkwood.learnx.models.CourseCategory;
 
@@ -14,6 +15,9 @@ public class CourseDAO extends Database{
     public static void main(String[] args) {
         List<Course> courses = get(5, 0, "", "");
         courses.forEach(System.out::println);
+
+        List<CourseCategory> allGenres = getAllCategories();
+        allGenres.forEach(System.out::println);
     }
     // get all courses
     public static List<Course> get(int limit, int offset,String categories,String skillLevel){

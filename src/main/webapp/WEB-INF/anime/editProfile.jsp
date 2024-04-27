@@ -26,7 +26,14 @@
                             <div class="row">
                                 <div class="col-md-4 border-right">
                                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                                        <img class="rounded-circle mt-5" src="${appURL}/images/personal_project/john.jpeg" width="90">
+                                        <div class="profile-pic">
+                                            <label class="-label" for="file">
+                                                <span class="glyphicon glyphicon-camera"></span>
+                                                <span>Change Image</span>
+                                            </label>
+                                            <input id="file" type="file" onchange="loadFile(event)"/>
+                                            <img src="${appURL}/images/personal_project/john.jpeg" id="output" width="200" />
+                                        </div>
                                         <span class="font-weight-bold">${activeUser.username}</span>
                                         <span class="text-black-50">${activeUser.email}</span>
                                         <span>United States</span>

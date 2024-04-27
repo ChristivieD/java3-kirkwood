@@ -128,6 +128,11 @@ public class User {
     }
 
     public void setPrivileges(String privileges) {
+        Pattern pattern = MyValidator.privilegesPattern;
+        Matcher matcher = pattern.matcher(privileges);
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException("Invalid privileges selection");
+        }
         this.privileges = privileges;
     }
 
@@ -136,6 +141,22 @@ public class User {
     }
 
     public void setStatus(String status) {
+        Pattern pattern = MyValidator.statusPattern;
+        Matcher matcher = pattern.matcher(status);
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException("Invalid status selection");
+        }
         this.status = status;
+    }
+    private boolean active;
+
+    // Other attributes and methods
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

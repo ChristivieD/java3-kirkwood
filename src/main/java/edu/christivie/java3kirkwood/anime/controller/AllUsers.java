@@ -17,12 +17,12 @@ public class AllUsers extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        HttpSession session = req.getSession();
-//        User userFromSession = (User)session.getAttribute("activeUser");
-//        if(userFromSession == null || !userFromSession.getStatus().equals("active") || !userFromSession.getPrivileges().equals("admin")) {
-//            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
-//            return;
-//        }
+        HttpSession session = req.getSession();
+        User userFromSession = (User)session.getAttribute("activeUser");
+        if(userFromSession == null || !userFromSession.getStatus().equals("active") || !userFromSession.getPrivileges().equals("admin")) {
+            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
 
         List<User> users = UsersDAO.getAll();
         users.forEach(System.out::println);

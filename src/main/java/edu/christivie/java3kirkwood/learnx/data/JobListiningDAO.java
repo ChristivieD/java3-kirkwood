@@ -14,25 +14,25 @@ public class JobListiningDAO extends Database{
         List<JobListing> jobListings = getAll(5, 0, "");
         jobListings.forEach(System.out::println);
     }
-    public static List<JobListing> getAll(int limit, int offset,String location){
+    public static List<JobListing> getAll(int limit, int offset, String location) {
         List<JobListing> jobListings = new ArrayList<>();
-        try(Connection connection = getConnection();
-            CallableStatement statement = connection.prepareCall("{CALL sp_get_job_listings(?,?,?)}"))
-        {
-            statement.setInt(1,limit);
-            statement.setInt(2,offset);
-            statement.setString(3,location);
-            try(ResultSet resultSet = statement.executeQuery()){
+        try (Connection connection = getConnection();
+             CallableStatement statement = connection.prepareCall("{CALL sp_get_job_listings(?,?,?)}")) {
+            statement.setInt(1, limit);
+            statement.setInt(2, offset);
+            statement.setString(3, location);
+            try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     int job_id = resultSet.getInt("job_id");
                     int department_id = resultSet.getInt("department_id");
-                    String feature = resultSet.getString("feature");
+                    String department_name = resultSet.getString("department_name");
                     String position = resultSet.getString("position");
                     String posted_at = resultSet.getString("posted_at");
                     String contract = resultSet.getString("contract");
                     String description = resultSet.getString("description");
-                    JobListing jobListing = new JobListing(job_id,department_id,feature,position,posted_at,contract,location,description);
-                    JobListing.add(jobListing);
+
+                    JobListing jobListing = new JobListing(job_id, department_id, department_name, position, posted_at, contract, location, description);
+                    jobListings.add(jobListing);
                 }
             }
         } catch (SQLException e) {
@@ -40,4 +40,5 @@ public class JobListiningDAO extends Database{
         }
         return jobListings;
     }
+
 }

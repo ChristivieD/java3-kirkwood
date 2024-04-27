@@ -20,8 +20,8 @@
                                 <td>${user.username}</td>
                                 <td>${user.email}</td>
                                 <td>
-<%--                                    <a href="${appURL}/edit-user?id=${user.id}" class="btn btn-primary">Edit</a>--%>
-<%--                                    <a href="${appURL}/delete-user?id=${user.id}" class="btn btn-danger">Delete</a>--%>
+                                    <a href="${appURL}/editUser?user_id=${user.user_id}" class="btn btn-primary">Edit</a>
+                                    <a href="${appURL}/deleteUser?id=${user.user_id}" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
                         </c:forEach>
