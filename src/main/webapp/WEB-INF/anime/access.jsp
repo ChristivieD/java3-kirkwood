@@ -32,7 +32,7 @@
                             <div class="form-outline mb-4">
                                 <label class="form-label" for="inputEmail">Email address</label>
                                 <div class="input-group input-group-lg">
-                                    <input type="email" id="inputEmail" class="form-control form-control-lg" name="inputEmail" value="${results.email}"/>
+                                    <input type="text" id="inputEmail" class="form-control form-control-lg" name="inputEmail" value="${results.email}"/>
                                 </div>
                             </div>
                             <!-- Password -->

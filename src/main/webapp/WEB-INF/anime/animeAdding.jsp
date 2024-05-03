@@ -32,7 +32,7 @@
                                                 <span>Add an anime</span>
                                             </label>
                                             <input id="inputImage" name="inputImage" type="file" onchange="loadFile(event)"/>
-                                            <img src="C:\Users\lised\Documents\Java_III" id="output" width="200" />
+                                            <img src="${appURL}/images/personal_project/${anime.image}" id="output" width="200" />
                                         </div>
                                     </div>
                                 </div>

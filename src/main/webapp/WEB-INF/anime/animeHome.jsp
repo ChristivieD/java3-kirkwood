@@ -26,22 +26,27 @@
                     <div class="carousel-item active">
                         <img src="${appURL}/images/personal_project/test2.jpg" class="d-block w-100" alt="Graduation hat">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>First slide label</h5>
-                            <p>Some representative placeholder content for the first slide.</p>
+                            <h5>Fate gate stay</h5>
+                            <p>Through the Gate of Babylon, Gilgamesh can instantly summon swords, spears, axes, hammers,
+                                and all other types of weapons stored inside the treasury.
+                                To average heroes and servants, the Gate of Babylon is actually a useless Noble Phantasm.</p>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <img src="${appURL}/images/personal_project/test3.jpg" class="d-block w-100" alt="Books">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>Second slide label</h5>
-                            <p>Some representative placeholder content for the second slide.</p>
+                            <h5>One Piece</h5>
+                            <p> In a seafaring world, a young pirate captain sets out with his crew to attain the title
+                                of Pirate King, and to discover the mythical treasure known as 'One Piece. '</p>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <img src="${appURL}/images/personal_project/fantasy.jpg" class="d-block w-100" alt="Books">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>Third slide label</h5>
-                            <p>Some representative placeholder content for the third slide.</p>
+                            <h5>Inuyasha</h5>
+                            <p>Inuyasha is a hybrid of human and dog yōkai who first appears sealed to a tree in the feudal world.
+                                When a girl named Kagome Higurashi is being chased by a yōkai, Inuyasha
+                                convinces her to free him so that he might eliminate the enemy.</p>
                         </div>
                     </div>
                 </div>

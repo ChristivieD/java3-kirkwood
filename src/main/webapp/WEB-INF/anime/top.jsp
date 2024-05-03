@@ -1,6 +1,6 @@
 <%@include file="/WEB-INF/shared/top.jsp"%>
 <title>${initParam['project2Name']} | ${pageTitle}</title>
-<link rel="shortcut icon" href="${appURL}/images/personal_project/icon.png.png">
+<link rel="shortcut icon" href="${appURL}/images/personal_project/icon.png">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 <script src="https://kit.fontawesome.com/ce46e6e2d7.js" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
