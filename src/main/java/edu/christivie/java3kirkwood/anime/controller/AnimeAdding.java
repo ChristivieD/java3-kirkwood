@@ -2,6 +2,7 @@ package edu.christivie.java3kirkwood.anime.controller;
 
 import edu.christivie.java3kirkwood.anime.data.AnimeDAO;
 import edu.christivie.java3kirkwood.anime.models.Anime;
+import edu.christivie.java3kirkwood.anime.models.AnimeGenre;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -11,6 +12,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @WebServlet("/animeAdding")
@@ -19,7 +21,7 @@ public class AnimeAdding extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String redirect = req.getParameter("redirect");
         req.setAttribute("redirect", redirect);
-        req.setAttribute("pageTitle", "Add anime");
+        req.setAttribute("pageTitle", "Add an anime");
         req.getRequestDispatcher("WEB-INF/anime/animeAdding.jsp").forward(req,resp);
     }
 
@@ -33,7 +35,9 @@ public class AnimeAdding extends HttpServlet {
         String status = req.getParameter("inputStatus");
         String language = req.getParameter("inputLanguage");
         String title = req.getParameter("inputTitle");
+
         Map<String, String> results = new HashMap<>();
+
         results.put("date", date);
         results.put("genreId", String.valueOf(genreId));
         results.put("description", description);
@@ -43,14 +47,28 @@ public class AnimeAdding extends HttpServlet {
         results.put("language", language);
         results.put("title", title);
         Anime anime = AnimeDAO.addAnime(date, genreId, description,rating,image,status,language,title);
-        if (anime != null) {
+
+        List<Anime> animeList = AnimeDAO.getAnimes(20, 0, "","");
+
+        boolean animeAdded = false;
+        for (Anime existingAnime : animeList) {
+            if (existingAnime.getTitle().equals(title) && existingAnime.getRelease_date().equals(date)) {
+                animeAdded = true;
+                break;
+            }
+        }
+
+        if(animeAdded) {
             HttpSession session = req.getSession();
             session.setAttribute("flashMessageSuccess","Anime '" + title + "' has been successfully added.");
-
-            resp.sendRedirect(req.getContextPath() + "/animeList");
+            resp.sendRedirect("animeList");
+            return;
         } else {
-            req.setAttribute("errorMessage", "Failed to add anime");
-            req.getRequestDispatcher("WEB-INF/anime/animeAdding.jsp").forward(req, resp);
+            req.setAttribute("flashMessageWarning", "Failed to add anime");
         }
+        List<AnimeGenre> genreList = AnimeDAO.getAllGenres();
+        req.setAttribute("genreList",genreList);
+        req.setAttribute("anime",anime);
+        req.getRequestDispatcher("WEB-INF/anime/animeAdding.jsp").forward(req, resp);
     }
 }

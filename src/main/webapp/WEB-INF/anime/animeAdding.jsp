@@ -7,19 +7,21 @@
                     <div class="card-header">
                         <h5 class="card-title">${pageTitle}</h5>
                     </div>
-                    <div class="card-body ">
-                        <c:if test="${not empty flashMessageSuccess}">
-                            <div class="alert alert-success">
+                    <c:choose>
+                        <c:when test="${not empty flashMessageSuccess}">
+                            <div class="alert alert-success mb-2">
                                     ${flashMessageSuccess}
                             </div>
-                            <c:remove var="flashMessageSuccess"></c:remove>
-                        </c:if>
-                        <c:if test="${not empty flashMessageWarning}">
-                            <div class="alert alert-success">
+                            <c:remove var="flashMessageSuccess" scope="session"></c:remove>
+                        </c:when>
+                        <c:when test="${not empty flashMessageWarning}">
+                            <div class="alert alert-warning mb-2">
                                     ${flashMessageWarning}
                             </div>
-                            <c:remove var="flashMessageWarning"></c:remove>
-                        </c:if>
+                            <c:remove var="flashMessageWarning" scope="session"></c:remove>
+                        </c:when>
+                    </c:choose>
+                    <div class="card-body ">
                         <form action="${appURL}/animeAdding" method="post" style="width: 35rem;">
                             <div class="row">
                                 <div class="col-md-4 border-right">
@@ -45,7 +47,16 @@
                                             <!-- Anime Genre -->
                                             <div class="col-md-6">
                                                 <label for="inputGenre" class="form-label">Genre</label>
-                                                <input type="text" class="form-control" id="inputGenre" name="inputGenre">
+                                                <select class="form-control" name="inputGenre" id="inputGenre">
+                                                    <option value="1" >1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <c:forEach var="genre" items="${genreList}">
+                                                        <option value="${genre.genre_id}">${genre.genre_name}</option>
+                                                    </c:forEach>
+                                                </select>
                                             </div>
                                             <!-- Anime Description -->
                                             <div class="col-md-12">
@@ -55,7 +66,20 @@
                                             <!-- Anime Status -->
                                             <div class="col-md-6">
                                                 <label for="inputStatus" class="form-label">Status</label>
-                                                <input type="text" class="form-control" id="inputStatus" name="inputStatus">
+                                                <select class="form-control" name="inputStatus" id="inputStatus">
+                                                    <option value="ongoing" >ongoing</option>
+                                                    <option value="completed">completed</option>
+                                                    <option value="upcoming">upcoming</option>
+                                                </select>
+                                                <c:forEach var="anime" items="${anime}">
+                                                    <option value="${anime.status}"></option>
+
+                                                </c:forEach>
+                                            </div>
+                                            <!-- Anime Date -->
+                                            <div class="col-md-6">
+                                                <label for="inputDate" class="form-label">Date</label>
+                                                <input type="text" class="form-control" id="inputDate" name="inputDate">
                                             </div>
                                             <!-- Anime Language -->
                                             <div class="col-md-6">

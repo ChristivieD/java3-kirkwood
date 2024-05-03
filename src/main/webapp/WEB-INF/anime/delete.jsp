@@ -20,7 +20,7 @@
                                             <div class="form-outline mb-4">
                                                 <label class="form-label" for="inputEmail">Enter your email to confirm account deletion</label>
                                                 <div class="input-group input-group-lg">
-                                                    <input type="email" id="inputEmail" class="form-control <c:if test="${not empty results.emailError}">is-invalid</c:if>" name="inputEmail" value="${results.email}"/>
+                                                    <input type="email" id="inputEmail" class="form-control <c:if test="${not empty results.emailError}">is-invalid</c:if>" name="inputEmail" value="${results.email}">
                                                     <c:if test="${not empty results.emailError }"><div class="invalid-feedback">${results.emailError}</div></c:if>
                                                 </div>
                                             </div>

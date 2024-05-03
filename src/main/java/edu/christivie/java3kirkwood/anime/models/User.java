@@ -2,6 +2,7 @@ package edu.christivie.java3kirkwood.anime.models;
 
 import edu.christivie.java3kirkwood.shared.MyValidator;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,6 +15,7 @@ public class User {
     private String picture;
     private String privileges;
     private String status;
+    private String language;
 
     public String getLanguage() {
         return language;
@@ -27,13 +29,11 @@ public class User {
         }
         this.language = language;
     }
-
-    private  String language;
     public User(){
 
     }
 
-    public User(int id, String username, char[] password, String birthday, String privileges, String status) {
+    public User(int id, String username, char[] password, String birthday, String privileges, String status, String language) {
         this.user_id = id;
         this.username = username;
         this.password = password;
@@ -41,14 +41,6 @@ public class User {
         this.privileges = privileges;
         this. status = status;
         this.language = language;
-    }
-
-    @Override
-    public String toString() {
-        return "Users{" +
-                "user_id=" + user_id +
-                ", username='" + username + '\'' +
-                '}';
     }
 
     public User(int user_id, String username, String email, char[] password, String birthday, String picture, String privileges, String status, String language) {
@@ -158,5 +150,20 @@ public class User {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "user_id=" + user_id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password=" + Arrays.toString(password) +
+                ", birthday='" + birthday + '\'' +
+                ", privileges='" + privileges + '\'' +
+                ", status='" + status + '\'' +
+                ", language='" + language + '\'' +
+                ", active=" + active +
+                '}';
     }
 }

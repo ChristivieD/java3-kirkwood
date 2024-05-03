@@ -22,6 +22,16 @@
     </c:choose>
 
     <section class="container my-5">
+        <form id="filterForm" action="${appURL}/animeList" method="GET">
+            <!-- Status Filter -->
+            <h2>Filterable List</h2>
+            <p>Type something in the input field to search the list for specific items:</p>
+            <input class="form-control" id="inputFilter" type="text" placeholder="Search..">
+            <br>
+        </form>
+
+        <c:if test="${totalAnime gt 0}"></c:if>
+        <%@include file="animePagination2.jsp"%>
         <c:forEach items="${animes}" var="anime">
             <c:if test="${anime.status eq 'upcoming'}">
                 <div class="card mb-3">
@@ -47,7 +57,6 @@
                                     </small>
                                 </p>
                                 <p class="card-text"><small class="text-muted"> Rating: ${anime.rating}</small></p>
-                                <p class="card-text"><a href="${appURL}/deleteAnime?anime_id=${anime.anime_id}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete ${anime.title}?')">Delete</a></p>
 
                             </div>
                         </div>

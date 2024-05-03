@@ -22,7 +22,7 @@
                     </c:if>
 
                     <a class="list-group-item" href="${appURL}/editProfile"><i class="fas fa-user-pen me-2"></i>Edit Profile</a>
-                    <a class="list-group-item" href="${appURL}/deleteUser"><i class="bi bi-trash fa-fw me-2"></i>Delete Account</a>
+                    <a class="list-group-item" href="${appURL}/delete"><i class="bi bi-trash fa-fw me-2"></i>Delete Account</a>
                 </div>
             </div>
         </div><%--   End Offcanvas body     --%>

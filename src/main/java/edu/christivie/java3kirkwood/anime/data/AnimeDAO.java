@@ -12,16 +12,18 @@ import java.util.TreeMap;
 
 public class AnimeDAO extends Database1 {
     public static void main(String[] args) {
-        List<Anime> animeList = getAnimes(10, 0, "", "");
-        animeList.forEach(System.out::println);
+//        List<Anime> animeList = getAnimes(10, 0, "", "");
+//        animeList.forEach(System.out::println);
 
         List<AnimeGenre> allGenres = getAllGenres();
         allGenres.forEach(System.out::println);
-        List<Review> reviews = getReviewsByAnimeId(4);
-        reviews.forEach(System.out::println);
+//        List<Review> reviews = getReviewsByAnimeId(4);
+//        reviews.forEach(System.out::println);
 
-        Anime anime = getAnimeById(4);
-        System.out.println(anime);
+//        Anime anime = getAnimeById(4);
+//        System.out.println(anime);
+        int count = getAnimeCount();
+        System.out.println("total count:" + count);
     }
     public static List<Anime> getAnimes(int limit, int offset, String genre, String status_type) {
         List<Anime> animeList = new ArrayList<>();
@@ -72,9 +74,6 @@ public class AnimeDAO extends Database1 {
         }
         return genres;
     }
-    // get single course
-    // add new courses
-    // update a course
     public static boolean review(int user_id, int anime_id){
         try(Connection connection = getConnection();
             CallableStatement statement = connection.prepareCall("{CALL sp_add_review(?,?,?,?,?)} ");
@@ -182,8 +181,9 @@ public class AnimeDAO extends Database1 {
             statement.setString(7, language);
             statement.setString(8, title);
             int rowsAffected = statement.executeUpdate();
+
             if(rowsAffected == 1){
-                int animeId = statement.getInt(8);
+                int animeId = statement.getInt(9);
                 return getAnimeById(animeId);
             }
         } catch (SQLException e) {
@@ -203,6 +203,17 @@ public class AnimeDAO extends Database1 {
             throw new RuntimeException(e);
         }
     }
-
-
+    public static  int getAnimeCount(){
+        try(Connection connection = getConnection();
+            CallableStatement statement = connection.prepareCall("{CALL sp_get_animes_count()}");
+            ResultSet resultSet = statement.executeQuery();
+        ) {
+            if (resultSet.next()) {
+                return resultSet.getInt("total_anime");
+            }
+        } catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return 0;
+    }
 }

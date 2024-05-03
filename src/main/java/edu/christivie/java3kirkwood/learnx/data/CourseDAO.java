@@ -18,6 +18,9 @@ public class CourseDAO extends Database{
 
         List<CourseCategory> allGenres = getAllCategories();
         allGenres.forEach(System.out::println);
+        int count = getCourseCount();
+        System.out.println("total count is :" + count);
+
     }
     // get all courses
     public static List<Course> get(int limit, int offset,String categories,String skillLevel){
@@ -109,5 +112,18 @@ public class CourseDAO extends Database{
             System.out.println(e.getMessage());
         }
         return enrollments;
+    }
+    public static int getCourseCount() {
+        try(Connection connection = getConnection();
+            CallableStatement statement = connection.prepareCall("{CALL sp_get_total_courses()}");
+            ResultSet resultSet = statement.executeQuery();
+        ) {
+            if(resultSet.next()) {
+                return resultSet.getInt("total_courses");
+            }
+        } catch(SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return 0;
     }
 }

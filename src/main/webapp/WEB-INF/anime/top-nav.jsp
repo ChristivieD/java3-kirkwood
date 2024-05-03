@@ -10,27 +10,26 @@
             <li><a href="${appURL}/anime" class="nav-link px-2 link-secondary">Home</a></li>
             <li><a href="${appURL}/animeList" class="nav-link px-2">List</a></li>
 <%--            <li><a href="${appURL}/search" class="nav-link px-2">Search</a></li>--%>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Genres
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <c:forEach items="${genres}" var="genre">
-                        <li><a class="dropdown-item" href="${appURL}/search?genre=${genre.genre_id}">${genre.genre_name}</a></li>
-                    </c:forEach>
-                </ul>
-            </li>
+<%--            <li class="nav-item dropdown">--%>
+<%--                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">--%>
+<%--                    Genres--%>
+<%--                </a>--%>
+<%--                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">--%>
+<%--                    <c:forEach items="${genres}" var="genre">--%>
+<%--                        <li><a class="dropdown-item" href="${appURL}/search?genre=${genre.genre_id}">${genre.genre_name}</a></li>--%>
+<%--                    </c:forEach>--%>
+<%--                </ul>--%>
+<%--            </li>--%>
             <c:choose>
                 <c:when test="${sessionScope.activeUser.privileges eq 'user'}">
                     <li><a href="${appURL}/user" class="nav-link px-2 <c:if test="${pageTitle eq 'User Dashboard'}">link-dark</c:if>">User Dashboard</a></li>
                 </c:when>
                 <c:when test="${sessionScope.activeUser.privileges eq 'premium'}">
                     <li><a href="${appURL}/premium" class="nav-link px-2 <c:if test="${pageTitle eq 'Premium Dashboard'}">link-dark</c:if>">Premium Dashboard</a></li>
+                    <li><a href="${appURL}/comingSoon" class="nav-link px-2">Coming Soon</a></li>
                 </c:when>
                 <c:when test="${sessionScope.activeUser.privileges eq 'admin'}">
                     <li><a href="${appURL}/admin" class="nav-link px-2 <c:if test="${pageTitle eq 'Admin Dashboard'}">link-dark</c:if>">Admin Dashboard</a></li>
-                </c:when>
-                <c:when test="${sessionScope.activeUser.privileges eq 'premium'}">
                     <li><a href="${appURL}/comingSoon" class="nav-link px-2">Coming Soon</a></li>
                 </c:when>
                 <c:when test="${sessionScope.activeUser.privileges eq 'admin'}">

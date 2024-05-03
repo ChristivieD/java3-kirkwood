@@ -32,16 +32,18 @@ public class DeleteUser extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String email = req.getParameter("inputEmail");
 
-        HttpSession session = req.getSession();
-        User activeUser = (User) session.getAttribute("activeUser");
         Map<String, String> results = new HashMap<>();
         results.put("email", email);
+
+        HttpSession session = req.getSession();
+        User activeUser = (User) session.getAttribute("activeUser");
 
         if (email == null || email.trim().isEmpty()) {
             results.put("emailError", "Please enter your email address.");
         } else if (!email.equals(activeUser.getEmail())) {
             results.put("emailError", "The email address you entered does not match the active user's email.");
         }
+
 
         if (!results.containsKey("emailError")) {
             UsersDAO.delete(activeUser);

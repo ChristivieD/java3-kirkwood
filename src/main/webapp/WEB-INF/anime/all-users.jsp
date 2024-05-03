@@ -11,6 +11,7 @@
                         <tr>
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
+                            <th scope="col">Status</th>
                             <th scope="col"></th>
                         </tr>
                         </thead>
@@ -19,9 +20,10 @@
                             <tr>
                                 <td>${user.username}</td>
                                 <td>${user.email}</td>
+                                <td>${user.status}</td>
                                 <td>
                                     <a href="${appURL}/editUser?user_id=${user.user_id}" class="btn btn-primary">Edit</a>
-                                    <a href="${appURL}/deleteUser?id=${user.user_id}" class="btn btn-danger">Delete</a>
+<%--                                    <a href="${appURL}/deleteUser?id=${user.user_id}" class="btn btn-danger">Delete</a>--%>
                                 </td>
                             </tr>
                         </c:forEach>

@@ -9,28 +9,25 @@
                     <div class="card-header">
                         <h5 class="card-title">${pageTitle}</h5>
                     </div>
+                    <c:when test="${not empty flashMessageSuccess}">
+                        <div class="alert alert-success mb-2">
+                                ${flashMessageSuccess}
+                        </div>
+                        <c:remove var="flashMessageSuccess" scope="session"></c:remove>
+                    </c:when>
+                    <c:when test="${not empty flashMessageWarning}">
+                        <div class="alert alert-warning mb-2">
+                                ${flashMessageWarning}
+                        </div>
+                        <c:remove var="flashMessageWarning" scope="session"></c:remove>
+                    </c:when>
                     <div class="card-body ">
-                        <h6>If you delete your account, you will lose your all data.</h6>
-                        <form action="${appURL}/delete" method="post">
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <div class="p-3 py-5">
-                                        <div class="row mt-3">
-                                            <!-- Email -->
-                                            <div class="form-outline mb-4">
-                                                <label class="form-label" for="inputEmail">Enter your email to confirm account deletion</label>
-                                                <div class="input-group input-group-lg">
-                                                    <input type="email" id="inputEmail" class="form-control <c:if test="${not empty results.emailError}">is-invalid</c:if>" name="inputEmail" value="${results.email}"/>
-                                                    <c:if test="${not empty results.emailError }"><div class="invalid-feedback">${results.emailError}</div></c:if>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-5 text-right">
-                                <button class="btn btn-danger mb-0" type="submit">Delete my account</button>
-                            </div>
+                        <h6>If you delete this account, you will lose  all associated data.</h6>
+                        <form action="${appURL}/deleteUser?user_id=${user.user_id}" method="post">
+                            <input type="hidden" name="inputUser" value="${user_id}">
+                            <p>Are you sure you want to delete this user?</p>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <a href="${appURL}/users" class="btn btn-secondary">Cancel</a>
                         </form>
                     </div>
                 </div>

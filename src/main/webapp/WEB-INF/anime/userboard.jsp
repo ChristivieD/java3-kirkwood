@@ -37,7 +37,7 @@
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="mb-0 ms-2">
-                                                <h6><a href="#">Watch List</a></h6>
+                                                <h6><a href="${appURL}/animeList">Watch List</a></h6>
                                             </div>
                                         </div>
                                     </td>

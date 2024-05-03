@@ -19,12 +19,15 @@ public class DeleteAccount extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("activeUser");
+        String redirect = req.getParameter("redirect");
         if (user == null) {
             session.setAttribute("flashMessageWarning", "You must log in to view this content");
             resp.sendRedirect("access?redirect=access");
             return;
         }
+        req.setAttribute("redirect", redirect);
         req.setAttribute("pageTitle", "Delete Account");
+        req.getRequestDispatcher("WEB-INF/anime/deleteUser.jsp").forward(req,resp);
     }
 
     @Override
@@ -38,22 +41,27 @@ public class DeleteAccount extends HttpServlet {
         }
 
         String idStr = req.getParameter("user_id");
-        int id = Integer.parseInt(idStr);
-        User user = UsersDAO.getUserById(id);
-
-        if (user != null && !user.equals(adminUser)) {
-            if (!user.isActive()) {
-                // Delete the user
-                UsersDAO.delete(user);
-                session.setAttribute("flashMessage", "User deleted successfully");
-            }else {
-                session.setAttribute("flashMessage", "User is active and cannot be deleted");
-            }
-        } else {
-            session.setAttribute("flashMessage", "You cannot delete this user");
+        int id;
+        try {
+            id = Integer.parseInt(idStr);
+        } catch (NumberFormatException e) {
+            // Handle invalid user ID parameter
+            session.setAttribute("flashMessageDanger", "Invalid user ID");
+            resp.sendRedirect("users");
+            return;
         }
 
-        // Redirect back to the admin dashboard or appropriate location
-        resp.sendRedirect("access?redirect=admin");
+        User user = UsersDAO.getUserById(id);
+
+        if (user != null) {
+            // Delete the user
+            UsersDAO.delete(user);
+            session.setAttribute("flashMessageSuccess", "User deleted successfully");
+
+        } else {
+            session.setAttribute("flashMessageDanger", "User with ID " + id + " does not exist");
+        }
+
+        resp.sendRedirect("users");
     }
 }

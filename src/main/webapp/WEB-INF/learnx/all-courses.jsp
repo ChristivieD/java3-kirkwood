@@ -10,6 +10,7 @@ Page content START -->
                 <!-- Main content START -->
                 <div class="col-xl-9 col-xxl-8">
                     <%@include file="flashMessage.jsp"%>
+                    <%@include file="/WEB-INF/learnx/pagination.jsp"%>
                     <!-- Course list START -->
                     <div class="row g-4">
                         <c:forEach items="${courses}" var="course">

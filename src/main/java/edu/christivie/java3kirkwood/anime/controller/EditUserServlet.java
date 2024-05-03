@@ -19,13 +19,21 @@ public class EditUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Todo: restrict page to admin users
         String idStr = req.getParameter("user_id");
+        String redirect = req.getParameter("redirect");
+        System.out.println(idStr);
         if (idStr == null || idStr.isEmpty()) {
             // Handle the case where anime_id is missing
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing the id parameter");
             return;
         }
         // Todo: validate the idStr
-        int id = Integer.parseInt(idStr);
+        int id;
+        try{
+         id = Integer.parseInt(idStr);
+        } catch (NumberFormatException ex){
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST,"Invalid user id");
+            return;
+        }
         User user = UsersDAO.getUserById(id);
         if (user == null) {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND, "User not found");
@@ -33,9 +41,10 @@ public class EditUserServlet extends HttpServlet {
         }
         req.setAttribute("user", user);
 
-        String name = (!user.getUsername().isEmpty() && !user.getPicture().isEmpty())
-                ? user.getUsername() + " " + user.getPicture()
+        String name = (user.getUsername() != null && !user.getUsername().isEmpty() && user.getPicture() != null && !user.getPicture().isEmpty())
+                ? user.getUsername()
                 : "User";
+        req.setAttribute("redirect", redirect);
         req.setAttribute("pageTitle", "Edit " + name);
         req.getRequestDispatcher("WEB-INF/anime/editUser.jsp").forward(req, resp);
     }
@@ -99,8 +108,8 @@ public class EditUserServlet extends HttpServlet {
             HttpSession session = req.getSession();
 
             if (!results.containsKey("userNameError") && !results.containsKey("emailError")
-            && !results.containsKey("pictureError") && !results.containsKey("languageError")
-            && !results.containsKey("statusError") && !results.containsKey("privilegesError")) {
+                && !results.containsKey("languageError") && !results.containsKey("statusError")
+                && !results.containsKey("privilegesError")) {
                 UsersDAO.update(user);
                 session.setAttribute("flashMessageSuccess", "User updated successfully");
             }
@@ -109,11 +118,11 @@ public class EditUserServlet extends HttpServlet {
         req.setAttribute("user", user);
         req.setAttribute("results", results);
 
-        String name = (!user.getUsername().isEmpty() && !user.getPicture().isEmpty())
+        String name = (user.getUsername() != null && !user.getUsername().isEmpty()
+                && user.getPassword() !=null && user.getPicture() != null && !user.getPicture().isEmpty())
                 ? user.getUsername() + " " + user.getPicture()
                 : "User";
         req.setAttribute("pageTitle", "Edit " + name);
-
-        req.getRequestDispatcher("WEB-INF/anime/editUser.jsp").forward(req, resp);
+        resp.sendRedirect("users");
     }
 }

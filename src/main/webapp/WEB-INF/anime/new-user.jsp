@@ -18,7 +18,7 @@
                                             <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
                                             <span class="h1 fw-bold mb-0">View Anime</span>
                                         </div>
-                                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign in to your account</h5>
+                                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign up for an account</h5>
                                         <%--Email--%>
                                         <div class="form-outline mb-4">
                                             <label for="inputEmail" class="form-label" >Email address</label>

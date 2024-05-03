@@ -4,19 +4,29 @@
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col col-md-6">
                 <div class="card" style="border-radius: .5rem; width: 45rem">
+                    <c:choose>
+                        <c:when test="${not empty flashMessageSuccess}">
+                            <div class="alert alert-success mb-2">
+                                    ${flashMessageSuccess}
+                            </div>
+                            <c:remove var="flashMessageSuccess" scope="session"></c:remove>
+                        </c:when>
+                        <c:when test="${not empty flashMessageWarning}">
+                            <div class="alert alert-warning mb-2">
+                                    ${flashMessageWarning}
+                            </div>
+                            <c:remove var="flashMessageWarning" scope="session"></c:remove>
+                        </c:when>
+                        <c:when test="${not empty flashMessageDanger}">
+                            <div class="alert alert-danger mb-2">
+                                    ${flashMessageDanger}
+                            </div>
+                            <c:remove var="flashMessageDanger" scope="session"></c:remove>
+                        </c:when>
+                    </c:choose>
                     <form action="${appURL}/editUser?user_id=${user.user_id}" method="POST">
-                        <!-- User Information Card -->
-                        <div class="card mb-3" style="border-radius: .5rem;">
-                            <!-- Card Content -->
-                        </div>
+                    <!-- User Information Card -->
                     <div class="row g-0">
-                        <div class="col-md-4 gradient-custom text-center text-white"
-                             style="border-top-left-radius: .5rem; width: 45rem; border-bottom-left-radius: .5rem; background: linear-gradient(45deg, #FF69B4, #FF6347, #FFFFFF)">
-                            <img src="${appURL}/images/personal_project/${user.picture}"
-                                 alt="${user.picture}" class="img-fluid my-5" style="width: 80px;" />
-                            <h5>${user.username}</h5>
-                            <i class="far fa-edit mb-5"></i>
-                        </div>
                         <div class="col-md-8">
                             <div class="card-body p-4">
                                 <h4>Edit User</h4>
@@ -85,6 +95,7 @@
                             </div>
                         </div>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>

@@ -14,9 +14,13 @@ import java.util.UUID;
 
 public class UsersDAO extends Database1 {
     public static void main(String[] args) throws SQLException {
-        getAll().forEach(System.out::println);
+//        getAll().forEach(System.out::println);
         User user = getUserById(1);
         System.out.println(user);
+        User user1 = new User();
+        user1.setUser_id(10);
+        UsersDAO.delete(user1);
+        System.out.println("User has been deleted");
     }
 
     public static List<User> getAll() {
@@ -76,6 +80,7 @@ public class UsersDAO extends Database1 {
         try(Connection connection = getConnection();
             CallableStatement statement = connection.prepareCall("{CALL sp_get_user_by_id(?)}");
         ){
+            System.out.println("Executing getUserId with ID: " + id);
             statement.setInt(1,id);
             ResultSet resultSet = statement.executeQuery();
             if(resultSet.next()){
@@ -95,6 +100,7 @@ public class UsersDAO extends Database1 {
             System.out.println("Check your stored procedures");
             System.out.println(e.getMessage());
         }
+        System.out.println("User with ID " + id + " not found"); // Log statement
         return null;
     }
 

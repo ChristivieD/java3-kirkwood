@@ -20,40 +20,63 @@
             <c:remove var="flashMessageDanger" scope="session"></c:remove>
         </c:when>
     </c:choose>
-
     <section class="container my-5">
-        <c:forEach items="${animes}" var="anime">
+        <!-- Filtering Form -->
+        <section class="container my-5">
+            <form id="filterForm" action="${appURL}/animeList" method="GET">
+                <!-- Status Filter -->
+                <h2>Filterable List</h2>
+                <p>Type something in the input field to search the list for specific items:</p>
+                <input class="form-control" id="inputFilter" type="text" placeholder="Search..">
+                <br>
+            </form>
+
+            <c:if test="${totalAnime gt 0}"></c:if>
+            <%@include file="animePagination.jsp"%>
+            <c:forEach items="${animes}" var="anime">
                 <c:if test="${anime.status eq 'ongoing' || anime.status eq 'completed'}">
                     <div class="card mb-3">
                         <div class="row g-0">
                             <div class="col-md-4" style="width: 8cm; height: 7cm; overflow: hidden;">
-                                <a href="${pageContext.request.contextPath}/details?anime_id=${anime.anime_id}">
+                                <a href="${appURL}/details?anime_id=${anime.anime_id}">
                                 <img src="${appURL}/images/personal_project/${anime.image}" class="img-fluid rounded-start" style="object-fit: cover; width: 100%; height: 100%;" alt="${anime.title}">
                             </a>
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
+                                    <c:if test="${not empty activeUser}">
+                                        <c:choose>
+                                            <c:when test="${activeUser.privileges eq 'premium' && activeUser.privileges eq 'admin' && activeUser.privileges eq 'user'}">
+                                                <p class="card-text">Description: ${anime.description}</p>
+                                                <p class="card-text"><small class="text-muted">Status: ${anime.status}</small></p>
+                                                <p class="card-text"><small class="text-muted">Language: ${anime.language}</small></p>
+                                                <p class="card-text">
+                                                    <small class="text-muted">Genre:
+                                                        <c:forEach items="${genres}" var="genre">
+                                                            <c:if test="${genre.genre_id eq anime.genre_id}">
+                                                                ${genre.genre_name}
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </small>
+                                                </p>
+                                                <p class="card-text"><small class="text-muted"> Rating: ${anime.rating}</small></p>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <p>Please upgrade your account to view this content.</p>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:if>
                                     <h5 class="card-title">${anime.title}</h5>
-                                    <p class="card-text">Description: ${anime.description}</p>
-                                    <p class="card-text"><small class="text-muted">Status: ${anime.status}</small></p>
-                                    <p class="card-text"><small class="text-muted">Language: ${anime.language}</small></p>
-                                    <p class="card-text">
-                                        <small class="text-muted">Genre:
-                                            <c:forEach items="${genres}" var="genre">
-                                                <c:if test="${genre.genre_id eq anime.genre_id}">
-                                                    ${genre.genre_name}
-                                                </c:if>
-                                            </c:forEach>
-                                        </small>
-                                    </p>
-                                    <p class="card-text"><small class="text-muted"> Rating: ${anime.rating}</small></p>
-                                        <p class="card-text"><a href="${appURL}/deleteAnime?anime_id=${anime.anime_id}" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete ${anime.title}?')">Delete</a></p>
+                                    <c:if test="${empty activeUser}">
+                                        <p>You need to login to view this content. Please Login. </br> <a href="${appURL}/new-user">Login</a></p>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </c:if>
-        </c:forEach>
+            </c:forEach>
+        </section>
     </section>
 </main>
 <%@include file="/WEB-INF/anime/bottom.jsp"%>

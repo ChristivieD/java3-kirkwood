@@ -12,11 +12,8 @@ public class JobListing {
     private String contract;
     private String location;
     private String description;
-    public JobListing(){
 
-    }
-
-    public JobListing(int job_id, int department_id, String feature, String position, String posted_at, String contract, String location, String description) {
+    public JobListing() {
     }
 
     public JobListing(int job_id, int department_id, String department_name, boolean feature, String position, Instant posted_at, String contract, String location, String description) {
@@ -31,8 +28,6 @@ public class JobListing {
         this.description = description;
     }
 
-    public static void add(JobListing jobListing) {
-    }
 
 
     public int getJob_id() {

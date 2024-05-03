@@ -3,6 +3,7 @@ package edu.christivie.java3kirkwood.anime.models;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.Instant;
+import java.util.Objects;
 
 public class Anime implements Comparable<Anime>{
     private int anime_id;
@@ -140,6 +141,24 @@ public class Anime implements Comparable<Anime>{
     }
 
     public void add(Review review) {
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj)
+            return true;
+        if(obj == null || getClass() != obj.getClass())
+            return  false;
+        Anime anime =(Anime) obj;
+        return Objects.equals(title, anime.title) &&
+                Objects.equals(release_date, anime.release_date) &&
+                Objects.equals(description, anime.description) &&
+                Objects.equals(rating, anime.rating) &&
+                Objects.equals(image, anime.image) &&
+                Objects.equals(status, anime.status) &&
+                Objects.equals(language, anime.language) &&
+                Objects.equals(genre, anime.genre) &&
+                Objects.equals(genre_id, anime.genre_id);
     }
 
     @Override
