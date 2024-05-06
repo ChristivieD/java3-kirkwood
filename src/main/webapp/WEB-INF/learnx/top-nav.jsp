@@ -17,7 +17,7 @@
                     <li><a href="${appURL}/teacher" class="nav-link px-2 <c:if test="${pageTitle eq 'Teacher Dashboard'}">link-dark</c:if>"><fmt:message key="topNav.teacher"></fmt:message></a></li>
                 </c:when>
                 <c:when test="${sessionScope.activeUser.privileges eq 'admin'}">
-                    <li><a href="${appURL}/admin" class="nav-link px-2 <c:if test="${pageTitle eq 'Admin Dashboard'}">link-dark</c:if>"><fmt:message key="topNav.admin"></fmt:message></a></li>
+                    <li><a href="${appURL}/administrator" class="nav-link px-2 <c:if test="${pageTitle eq 'Admin Dashboard'}">link-dark</c:if>"><fmt:message key="topNav.admin"></fmt:message></a></li>
                 </c:when>
             </c:choose>
         </ul>

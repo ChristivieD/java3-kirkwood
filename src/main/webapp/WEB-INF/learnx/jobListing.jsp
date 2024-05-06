@@ -10,7 +10,7 @@
                         <span class="badge bg-success">Badge</span>
                         <span class="badge bg-warning text-dark">Badge</span>
                     </div>
-                    <h4 class="my-2">Job Title</h4>
+                    <h4 class="my-2">${jobListing.department_name}</h4>
                     <div class="mb-2">
                         <span class="me-2">${jobListing.description}</span>
                         <span class="me-2">${jobListing.feature}</span>
@@ -26,6 +26,7 @@
                         <span class="ms-2 badge rounded-pill bg-secondary">Tag</span>
                         <span class="ms-2 badge rounded-pill bg-dark">Tag</span>
                     </div>
+                    <a href="${appURL}/application?job_id=${jobListing.job_id}" class="btn btn-primary">Apply</a>
                 </div>
             </div>
         </c:forEach>

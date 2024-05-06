@@ -13,7 +13,7 @@ public class JobListing {
     private String location;
     private String description;
 
-    public JobListing() {
+    public JobListing(int job_id, int departmentId, boolean feature, String position, Instant posted_at, String contract, String location, String description) {
     }
 
     public JobListing(int job_id, int department_id, String department_name, boolean feature, String position, Instant posted_at, String contract, String location, String description) {
